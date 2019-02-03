@@ -20,11 +20,12 @@ namespace CoreAPI.Controllers
     public class TagController : ApiController
 
     {
-         private Entities db = DBConnect.getConnection();
-       // private Entities db = new Entities();
+        private Entities db = DBConnect.getConnection();
+        // private Entities db = new Entities();
         public TagController()
         {
-            Mapper.Initialize(cfg=> {
+            Mapper.Initialize(cfg =>
+            {
 
                 cfg.CreateMap<Tags, TagDataModel>().ForMember(dest => dest.F_UserID, opt => opt.MapFrom(src => src.F_UserID));
                 cfg.CreateMap<TagDataModel, Tags>().ForMember(dest => dest.F_UserID, opt => opt.MapFrom(src => src.F_UserID));
@@ -41,18 +42,19 @@ namespace CoreAPI.Controllers
 
 
             });
-         //   db.Configuration.LazyLoadingEnabled = false;
+            //   db.Configuration.LazyLoadingEnabled = false;
         }
         //ezafe kardane tag va update table Tags_Posts_Mapping
         //post:api/Tag/
         [ResponseType(typeof(TagDataListModel))]
-        public async Task<IHttpActionResult> AddTags(TagDataListModel tag,int id)//post id
+        public async Task<IHttpActionResult> AddTags(TagDataListModel tag, int id)//post id
         {
             Tags _tag = new Tags();
             TagsPostsMappingDataModel tagpost = new TagsPostsMappingDataModel();
             Tags_Posts_Mapping _tagpost;
-            
-        
+            string UserID = Tools.RootUserID();
+            var FoundedTags = db.Tags.Where(u => u.F_UserID == UserID && tag.ListTag.Select(e => e.Text).Contains(u.Text));
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -60,22 +62,26 @@ namespace CoreAPI.Controllers
             int i = -1;
             foreach (var item in tag.ListTag)
             {
-                _tag = Mapper.Map<TagDataModel, Tags>(item);
-                _tag.ID = i;
-                _tag.F_UserID = Tools.UserID();
+                if (!FoundedTags.Select(u => u.Text).Contains(item.Text))
+                {
+                    _tag = Mapper.Map<TagDataModel, Tags>(item);
+                    _tag.ID = i;
+                    _tag.F_UserID = UserID;
+                    db.Tags.Add(_tag);
+                    i = _tag.ID;
+                }
+                else
+                    i = item.ID;
                 tagpost.F_PostsID = id;
                 tagpost.F_TagsID = i;
                 _tagpost = Mapper.Map<TagsPostsMappingDataModel, Tags_Posts_Mapping>(tagpost);
-                db.Tags.Add(_tag);
                 db.Tags_Posts_Mapping.Add(_tagpost);
-                i--;
             }
-
             await db.SaveChangesAsync();
             return Ok();
 
         }
-    
+
 
         //dar in class az gettag1 baray namayesh hame tag ha va az gettag2 baray namayesh bar hasbe filter id estefade shode ast
         // GET: api/Tags/
@@ -85,32 +91,32 @@ namespace CoreAPI.Controllers
         [ResponseType(typeof(List<TagDataModel>))]
         public async Task<IHttpActionResult> GetTagPosts(int id)//tag id
 
-        {     
+        {
             List<PostDataModel> _PostList = new List<PostDataModel>();
             string userId = Tools.UserID();
-            var tagList = await db.Tags_Posts_Mapping.Include(p=>p.Posts).Where(u => u.F_TagsID == id).ToListAsync();
+            var tagList = await db.Tags_Posts_Mapping.Include(p => p.Posts).Where(u => u.F_TagsID == id).ToListAsync();
             List<PostDataModel> _post = new List<PostDataModel>();
             //must be updated and join statement be replaced , this version is due to the emergency condition
             foreach (var item in tagList)
             {
-                var post = db.Posts.Where(u => u.ID == item.F_PostsID &&u.F_UserID==userId).FirstOrDefault();//conditions updated
+                var post = db.Posts.Where(u => u.ID == item.F_PostsID && u.F_UserID == userId).FirstOrDefault();//conditions updated
                 _post.Add(Mapper.Map<Posts, PostDataModel>(post));
             }
 
             return Ok(_post);
         }
 
-       /// <summary>
-       /// لیست پست هایی که آن تگ را دارند
-       /// </summary>
-       /// <param name="id"></param>
-       /// <param name="username"></param>
-       /// <param name="pagesize"></param>
-       /// <param name="pagenumber"></param>
-       /// <returns></returns>
+        /// <summary>
+        /// لیست پست هایی که آن تگ را دارند
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="username"></param>
+        /// <param name="pagesize"></param>
+        /// <param name="pagenumber"></param>
+        /// <returns></returns>
         [Route("api/Tag/GetTagPostsUser")]
         [ResponseType(typeof(List<TagDataModel>))]
-        public async Task<IHttpActionResult> GetTagPosts(int id,string username,int pagesize,int pagenumber)//tag id
+        public async Task<IHttpActionResult> GetTagPosts(int id, string username, int pagesize, int pagenumber)//tag id
 
         {
             List<PostDataModel> _PostList = new List<PostDataModel>();
@@ -122,8 +128,8 @@ namespace CoreAPI.Controllers
                 var post = db.Posts.Where(u => u.ID == item.F_PostsID && u.F_UserID == userId).FirstOrDefault();//conditions updated
                 _post.Add(Mapper.Map<Posts, PostDataModel>(post));
             }
-            
-         
+
+
             return Ok(_post.ToPagedList(pagenumber, pagesize));
         }
         //dar in class az gettag1 baray namayesh hame tag ha va az gettag2 baray namayesh bar hasbe filter id estefade shode ast
@@ -135,7 +141,7 @@ namespace CoreAPI.Controllers
         {
             List<TagDataModel> _Taglist = new List<TagDataModel>();
             string userId = Tools.UserID();
-            var tagList = await db.Tags.Where(u => u.F_UserID == userId ).ToListAsync();
+            var tagList = await db.Tags.Where(u => u.F_UserID == userId).ToListAsync();
 
             foreach (var m in tagList)
             {
@@ -162,8 +168,8 @@ namespace CoreAPI.Controllers
                 return Content(HttpStatusCode.NotFound, "تگ با آیدی مورد نظر یافت نشد");
 
             }
-            var _tag =await db.Tags.FindAsync(id);
-            Mapper.Map(tag,_tag);        
+            var _tag = await db.Tags.FindAsync(id);
+            Mapper.Map(tag, _tag);
             db.Entry(_tag).State = EntityState.Modified;
             db.Entry(_tag).Property(x => x.F_UserID).IsModified = false;
 
@@ -173,7 +179,7 @@ namespace CoreAPI.Controllers
             return Ok("با موفقیت ویرایش شد");
 
         }
-      
+
         // DELETE: api/Tags/
         [ResponseType(typeof(Tags))]
         public async Task<IHttpActionResult> DeleteTags(int id)
@@ -195,7 +201,7 @@ namespace CoreAPI.Controllers
         public async Task<IHttpActionResult> GetTag(int id)
         {
             string userId = Tools.UserID();
-            var tag = await db.Tags.Where(u => u.F_UserID == userId  && u.ID == id).FirstOrDefaultAsync();
+            var tag = await db.Tags.Where(u => u.F_UserID == userId && u.ID == id).FirstOrDefaultAsync();
             if (tag == null)
             {
                 return NotFound();
@@ -208,7 +214,7 @@ namespace CoreAPI.Controllers
         private bool tagExists(int id)
         {
             string userId = Tools.UserID();
-            return db.Tags.Count(e => e.ID == id && e.F_UserID == userId ) > 0;
+            return db.Tags.Count(e => e.ID == id && e.F_UserID == userId) > 0;
         }
 
     }

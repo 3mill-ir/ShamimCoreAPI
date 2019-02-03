@@ -539,16 +539,16 @@ namespace CoreAPI.Controllers
         public async Task<IHttpActionResult> PutChangeSubmitedState(SubmiteState sts)
         {
             string userId = Tools.UserID();
-            var item = await db.Item.AsNoTracking().FirstOrDefaultAsync(u => u.ID == sts.id && u.Menu.F_UserID == userId);
+            var item = await db.Item.FirstOrDefaultAsync(u => u.ID == sts.id && u.Menu.F_UserID == userId);
             if (item == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
-            db.Entry(item).State = EntityState.Modified;
+            //db.Entry(item).State = EntityState.Modified;
             item.SubmitedState = sts.State;
             item.AdminDescription = sts.Description;
             db.SaveChanges();
-            db.Entry(item).State = EntityState.Detached;
+            //db.Entry(item).State = EntityState.Detached;
             return Ok();
         }
         ///// <summary>

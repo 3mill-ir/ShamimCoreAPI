@@ -66,7 +66,7 @@ namespace CoreAPI.Controllers
         [Route("api/Ticket/GetTicketAccessory")]
         public IHttpActionResult GetTicketAccessory()
         {
-            string F_UserId = Tools.UserID();
+            string F_UserId = Tools.RootUserID();
             int UnResponseTicket = db.Ticket.Where(u => u.Status == "در وضعیت انتظار" && u.F_UserID == F_UserId).Count();
             int ToResponseTicket = db.Ticket.Where(u => u.Status == "در حال بررسی" && u.F_UserID == F_UserId).Count();
             int ResponseTicket = db.Ticket.Where(u => u.Status == "پاسخ داده شده" && u.F_UserID == F_UserId).Count();

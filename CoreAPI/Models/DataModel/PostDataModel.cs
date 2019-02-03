@@ -23,7 +23,7 @@ namespace CoreAPI.Models.DataModel
         public string Tittle { get; set;}
         public string Description { get; set; }
 
-  
+        public Nullable<DateTime> EditedDateOnUTC { get; set; }
         public string Detail { get; set; }
         public  string ImagePath { get; set; }
         public Nullable<bool> isDeleted {get; set;}

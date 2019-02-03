@@ -22,7 +22,7 @@ using System.Linq.Dynamic;
 
 namespace CoreAPI.Controllers
 {
-    
+
     public class PostController : ApiController
     {
         private Entities db = DBConnect.getConnection();
@@ -48,7 +48,7 @@ namespace CoreAPI.Controllers
             });
             //  db.Configuration.LazyLoadingEnabled = false;
         }
-       
+
 
         /// <summary>
         /// لیست جستجو در پست
@@ -87,11 +87,11 @@ namespace CoreAPI.Controllers
 
             return Ok(_Postlist.ToList().ToPagedList(1, 15));
         }
-       /// <summary>
-       /// افزودن پست جدید
-       /// </summary>
-       /// <param name="post"></param>
-       /// <returns></returns>
+        /// <summary>
+        /// افزودن پست جدید
+        /// </summary>
+        /// <param name="post"></param>
+        /// <returns></returns>
         [Route("api/Post/AddPost")]
         [ResponseType(typeof(PostDataModel))]
         public async Task<IHttpActionResult> AddPost(PostDataModel post)
@@ -111,19 +111,19 @@ namespace CoreAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-        
+
             db.Posts.Add(_post);
             await db.SaveChangesAsync();
 
             return Ok(_post.ID);
         }
 
-      /// <summary>
-      /// ویرایش پست 
-      /// </summary>
-      /// <param name="id"></param>
-      /// <param name="post"></param>
-      /// <returns></returns>
+        /// <summary>
+        /// ویرایش پست 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="post"></param>
+        /// <returns></returns>
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutPost(int id, PostDataModel post)
         {
@@ -150,15 +150,14 @@ namespace CoreAPI.Controllers
 
             post.isDeleted = false;
             //  post.Status = true;
-            var _post = await db.Posts.FindAsync(id);
-
+            var _post = await db.Posts.Include(u => u.Tags_Posts_Mapping).FirstOrDefaultAsync(u => u.ID == id);
+            post.EditedDateOnUTC = DateTime.Now;
             Mapper.Map(post, _post);
             _post.F_UserID = Tools.UserID();
             db.Entry(_post).State = EntityState.Modified;
             db.Entry(_post).Property(x => x.F_UserID).IsModified = false;
-            if(!_post.CreatedOnUTC.HasValue)
-            db.Entry(_post).Property(x => x.CreatedOnUTC).IsModified = false;
-
+            if (!_post.CreatedOnUTC.HasValue)
+                db.Entry(_post).Property(x => x.CreatedOnUTC).IsModified = false;
             await db.SaveChangesAsync();
 
             return Ok();
@@ -189,9 +188,9 @@ namespace CoreAPI.Controllers
             foreach (var item in tag.ListTag)
             {
                 var temp = tags.FirstOrDefault(u => u.Text == item.Text);
-                if(temp==null)
+                if (temp == null)
                 {
-                    var temptag = new Tags() {F_UserID=F_UserID,Text=item.Text };
+                    var temptag = new Tags() { F_UserID = F_UserID, Text = item.Text };
                     db.Tags.Add(temptag);
                     tagposts.F_TagsID = temptag.ID;
                 }
@@ -205,11 +204,11 @@ namespace CoreAPI.Controllers
             return Ok();
         }
 
-   /// <summary>
-   /// حذف یک پست
-   /// </summary>
-   /// <param name="id"></param>
-   /// <returns></returns>
+        /// <summary>
+        /// حذف یک پست
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Route("api/Post/DeletePost")]
         [ResponseType(typeof(Posts))]
         public async Task<IHttpActionResult> DeletePost(int id)
@@ -218,12 +217,12 @@ namespace CoreAPI.Controllers
             {
                 return Content(HttpStatusCode.NotFound, "پست با آیدی مورد نظر پیدا نشد");
             }
-            var post =await db.Posts.FindAsync(id);
+            var post = await db.Posts.FindAsync(id);
             post.isDeleted = true;
             CascadeTools ct = new CascadeTools();
-            while (post.Comments.Count>0)
+            while (post.Comments.Count > 0)
             {
-               ct.DeleteCascadeComments(post.Comments.FirstOrDefault(),db);
+                ct.DeleteCascadeComments(post.Comments.FirstOrDefault(), db);
             }
 
             await db.SaveChangesAsync();
@@ -231,17 +230,17 @@ namespace CoreAPI.Controllers
             return Ok("پست مورد نظر با موفقیت حذف شد");
         }
 
-  
-      /// <summary>
-      /// جزییات یک پست برای پروفایل لوگین شده
-      /// </summary>
-      /// <param name="id"></param>
-      /// <returns></returns>
+
+        /// <summary>
+        /// جزییات یک پست برای پروفایل لوگین شده
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Route("api/Post/GetPostDetails")]
         [ResponseType(typeof(PostDataModel))]
         public async Task<IHttpActionResult> GetPostDetails(int id)//post id
         {
-           
+
             //string userId = Tools.UserID();
             string userId = Tools.RootUserID();
             var post = await db.Posts.Where(u => u.F_UserID == userId && u.isDeleted == false && u.ID == id).FirstOrDefaultAsync();
@@ -275,7 +274,7 @@ namespace CoreAPI.Controllers
             news.Like = "http://parkapi.3mill.ir/api/Post/GetLike?id=" + post.ID;
             news.Dislike = "http://parkapi.3mill.ir/api/Post/GetDisLike?id=" + post.ID;
             news.addComment = "http://parkapi.3mill.ir/Comment/PostComment";
-            news.ImagePath= Tools.ReturnPath("DynamicPageImages", Tools.UserName(username)) + news.ImagePath;
+            news.ImagePath = Tools.ReturnPath("DynamicPageImages", Tools.UserName(username)) + news.ImagePath;
             NewsList newslist = new NewsList();
             List<PostDataModel> _Postlist = new List<PostDataModel>();
             var PostList = await db.Posts.Where(u => (u.isDeleted == false && u.Status == true) && (u.Tittle.Contains(post.Tittle) || u.Description.Contains(post.Tittle) || u.Detail.Contains(post.Tittle))).ToListAsync();
@@ -304,18 +303,18 @@ namespace CoreAPI.Controllers
             news.RelatedTopics = newslist;
             return Ok(news);
         }
- 
-     /// <summary>
-     /// جزییات پست خاص
-     /// </summary>
-     /// <param name="username"></param>
-     /// <param name="lang"></param>
-     /// <param name="id"></param>
-     /// <returns></returns>
+
+        /// <summary>
+        /// جزییات پست خاص
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="lang"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [Route("api/Post/GetPostDetailsUser")]
         [ResponseType(typeof(PostDataModel))]
-        public async Task<IHttpActionResult> GetPostDetails(string username, string lang,int id)//post id
+        public async Task<IHttpActionResult> GetPostDetails(string username, string lang, int id)//post id
         {
 
             string userId = Tools.UserID(username);
@@ -330,11 +329,11 @@ namespace CoreAPI.Controllers
         }
 
 
-       /// <summary>
-       /// تغییر وضعیت یک پست
-       /// </summary>
-       /// <param name="id"></param>
-       /// <returns></returns>
+        /// <summary>
+        /// تغییر وضعیت یک پست
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Route("api/Post/DeleteStstus")]
         [ResponseType(typeof(Posts))]
         public async Task<IHttpActionResult> DeleteStstus(int id)
@@ -352,11 +351,11 @@ namespace CoreAPI.Controllers
             return Ok("پست مورد نظر با موفقیت تغییر حالت داده شد");
         }
 
-       /// <summary>
-       /// تعداد لایک های یک پست
-       /// </summary>
-       /// <param name="id"></param>
-       /// <returns></returns>
+        /// <summary>
+        /// تعداد لایک های یک پست
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [Route("api/Post/GetLike")]
         [ResponseType(typeof(PostDataModel))]
@@ -421,11 +420,11 @@ namespace CoreAPI.Controllers
             return Ok(_listcomment);
         }
 
-/// <summary>
-/// افزودن دیس لایک به پست
-/// </summary>
-/// <param name="id"></param>
-/// <returns></returns>
+        /// <summary>
+        /// افزودن دیس لایک به پست
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [Route("api/Post/GetDislike")]
         [ResponseType(typeof(PostDataModel))]
@@ -492,11 +491,11 @@ namespace CoreAPI.Controllers
 
         }
 
-     /// <summary>
-     /// لیست پست ها بر اساس فیلتر های اعمال شده برای پروفایل لوگین شده 
-     /// </summary>
-     /// <param name="postfilterdatamodel"></param>
-     /// <returns></returns>
+        /// <summary>
+        /// لیست پست ها بر اساس فیلتر های اعمال شده برای پروفایل لوگین شده 
+        /// </summary>
+        /// <param name="postfilterdatamodel"></param>
+        /// <returns></returns>
         [Route("api/Post/postListPosts")]
         [ResponseType(typeof(ListPostDataModel))]
         public async Task<IHttpActionResult> postListPosts(FilterPostDatamodel postfilterdatamodel)
@@ -580,11 +579,11 @@ namespace CoreAPI.Controllers
         /// <returns></returns>
         [Route("api/Post/GetListPostsAndroid")]
         [ResponseType(typeof(ListPostDataModel))]
-        public IHttpActionResult GetListPostsAndroid(string username,int menuId)
+        public IHttpActionResult GetListPostsAndroid(string username, int menuId)
         {
             ListPostDataModel _Postlist = new ListPostDataModel();
             string userId = Tools.UserID(username);
-            var LastPostList = db.Posts.Where(u => u.isDeleted == false && u.Status == true && u.F_UserID == userId && u.F_MenuID==menuId);
+            var LastPostList = db.Posts.Where(u => u.isDeleted == false && u.Status == true && u.F_UserID == userId && u.F_MenuID == menuId);
 
             foreach (var m in LastPostList)
             {
@@ -602,12 +601,12 @@ namespace CoreAPI.Controllers
         /// <returns></returns>
         [Route("api/Post/postListPostsuser")]
         [ResponseType(typeof(ListPostDataModel))]
-        public IHttpActionResult postListPostsuser(FilterPostDatamodel postfilterdatamodel,string username)
+        public IHttpActionResult postListPostsuser(FilterPostDatamodel postfilterdatamodel, string username)
         {
             ListPostDataModel _Postlist = new ListPostDataModel();
             string userId = Tools.UserID(username);
             var LastPostList = db.Posts.Include(mbox => mbox.Menu).Where(u =>
-              u.isDeleted == false && u.Status==true && u.F_UserID == userId &&
+              u.isDeleted == false && u.Status == true && u.F_UserID == userId &&
               (postfilterdatamodel.MenuId == 0 | u.F_MenuID == postfilterdatamodel.MenuId) &&
               (string.IsNullOrEmpty(postfilterdatamodel.Language) | u.Language == postfilterdatamodel.Language) &&
               (postfilterdatamodel.FromTime == null | u.CreatedOnUTC >= postfilterdatamodel.FromTime) &&
@@ -641,7 +640,7 @@ namespace CoreAPI.Controllers
             }
 
 
-            var tempLastPostList =  LastPostList.OrderBy(sort_param).Skip((postfilterdatamodel.PageNumber - 1) * postfilterdatamodel.PageSize).Take(postfilterdatamodel.PageSize).ToList();
+            var tempLastPostList = LastPostList.OrderBy(sort_param).Skip((postfilterdatamodel.PageNumber - 1) * postfilterdatamodel.PageSize).Take(postfilterdatamodel.PageSize).ToList();
 
             foreach (var m in tempLastPostList)
             {
@@ -672,12 +671,12 @@ namespace CoreAPI.Controllers
             }
             return Ok(_Taglist);
         }
-       /// <summary>
-       /// لیست تگ های یک پست
-       /// </summary>
-       /// <param name="id"></param>
-       /// <param name="username"></param>
-       /// <returns></returns>
+        /// <summary>
+        /// لیست تگ های یک پست
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="username"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [Route("api/Post/GetPostTagsUser")]
         [ResponseType(typeof(List<TagDataModel>))]
@@ -691,7 +690,8 @@ namespace CoreAPI.Controllers
             foreach (var item in Taglist)
             {
                 var tag = db.Tags.Where(u => u.ID == item.F_TagsID && u.F_UserID == userId).FirstOrDefault();
-                _Taglist.Add(Mapper.Map<Tags, TagDataModel>(tag));
+                if (tag != null)
+                    _Taglist.Add(Mapper.Map<Tags, TagDataModel>(tag));
             }
             return Ok(_Taglist);
         }
@@ -739,12 +739,15 @@ namespace CoreAPI.Controllers
             string userId = Tools.UserID(username);
 
             List<Posts> _listpost = new List<Posts>();
-            if (menuid == -1) {
-                _listpost = await db.Posts.Where(u => u.F_UserID == userId &&  u.isDeleted == false && u.Status == true).OrderByDescending(x => x.CreatedOnUTC).Take(count).ToListAsync<Posts>();
-            }else {
+            if (menuid == -1)
+            {
+                _listpost = await db.Posts.Where(u => u.F_UserID == userId && u.isDeleted == false && u.Status == true).OrderByDescending(x => x.CreatedOnUTC).Take(count).ToListAsync<Posts>();
+            }
+            else
+            {
                 _listpost = await db.Posts.Where(u => u.F_UserID == userId && u.isDeleted == false && u.Status == true && u.F_MenuID == menuid).OrderByDescending(x => x.CreatedOnUTC).Take(count).ToListAsync<Posts>();
             }
-           // var posts = await db.Posts.Where(u => u.F_UserID == userId && u.isDeleted == false && u.Status == true && u.F_MenuID == menuid).OrderByDescending(x => x.CreatedOnUTC).Take(count).ToListAsync<Posts>();
+            // var posts = await db.Posts.Where(u => u.F_UserID == userId && u.isDeleted == false && u.Status == true && u.F_MenuID == menuid).OrderByDescending(x => x.CreatedOnUTC).Take(count).ToListAsync<Posts>();
             //  posts.OrderByDescending(x => x.CreatedOnUTC);
 
 
@@ -793,7 +796,7 @@ namespace CoreAPI.Controllers
         {
             List<PostDataModel> _list = new List<PostDataModel>();
             string userid = Tools.UserID(username);
-            var posts = await db.Posts.Where(u => u.F_UserID == userid && u.isDeleted == false && u.Status == true && u.F_MenuID == menuid).OrderByDescending(x => x.CreatedOnUTC).OrderByDescending(u => u.NumberOfLikes ).Take(count).ToListAsync<Posts>();
+            var posts = await db.Posts.Where(u => u.F_UserID == userid && u.isDeleted == false && u.Status == true && u.F_MenuID == menuid).OrderByDescending(x => x.CreatedOnUTC).OrderByDescending(u => u.NumberOfLikes).Take(count).ToListAsync<Posts>();
             foreach (var item in posts)
             {
                 _list.Add(Mapper.Map<Posts, PostDataModel>(item));

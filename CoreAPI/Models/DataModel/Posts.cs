@@ -41,6 +41,7 @@ namespace CoreAPI.Models.DataModel
         public string ImageAlt { get; set; }
         public Nullable<bool> AllowComment { get; set; }
         public string Language { get; set; }
+        public Nullable<System.DateTime> EditedDateOnUTC { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comments> Comments { get; set; }

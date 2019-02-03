@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MainDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MainDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AddressCity">
           <Key>
             <PropertyRef Name="ID" />
@@ -249,6 +249,7 @@
           <Property Name="ImageAlt" Type="nvarchar(max)" />
           <Property Name="AllowComment" Type="bit" />
           <Property Name="Language" Type="char" MaxLength="2" />
+          <Property Name="EditedDateOnUTC" Type="datetime" />
         </EntityType>
         <EntityType Name="Roll_Mapping_RollGroupe">
           <Key>
@@ -1020,8 +1021,7 @@
             <End Role="UserRollMapping" EntitySet="UserRollMapping" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MainDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1309,6 +1309,7 @@
           <NavigationProperty Name="Comments" Relationship="Self.FK_Comments_Posts" FromRole="Posts" ToRole="Comments" />
           <NavigationProperty Name="Menu" Relationship="Self.FK_Posts_Menu" FromRole="Posts" ToRole="Menu" />
           <NavigationProperty Name="Tags_Posts_Mapping" Relationship="Self.FK_Tags_Posts_Mapping_Posts" FromRole="Posts" ToRole="Tags_Posts_Mapping" />
+          <Property Name="EditedDateOnUTC" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Roll_Mapping_RollGroupe">
           <Key>
@@ -2353,6 +2354,7 @@
           <EntitySetMapping Name="Posts">
             <EntityTypeMapping TypeName="MainDBModel.Posts">
               <MappingFragment StoreEntitySet="Posts">
+                <ScalarProperty Name="EditedDateOnUTC" ColumnName="EditedDateOnUTC" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Tittle" ColumnName="Tittle" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
