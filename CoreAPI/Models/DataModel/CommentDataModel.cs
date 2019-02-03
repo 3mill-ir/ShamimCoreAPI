@@ -29,7 +29,7 @@ namespace CoreAPI.Models.DataModel
         public string F_UserID { get; set; }
      
         public string IPAddress { get; set; }
-
+        public virtual Posts Posts { get; set; }
         public  ICollection<CommentDataModel> Comments1 { get; set; }
       
     }

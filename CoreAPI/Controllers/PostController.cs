@@ -318,8 +318,9 @@ namespace CoreAPI.Controllers
         {
 
             string userId = Tools.UserID(username);
-            var post = await db.Posts.Where(u => u.F_UserID == userId && u.isDeleted == false && u.Status == true && u.ID == id && u.Language == lang).FirstOrDefaultAsync();
-
+            var post = await db.Posts.Include(w=>w.Comments).AsNoTracking().Where(u => u.F_UserID == userId && u.isDeleted == false && u.Status == true && u.ID == id && u.Language == lang).FirstOrDefaultAsync();
+            post.Comments = post.Comments.Where(u => u.Dispaly == true).ToList();
+            post.NumberOfComments = post.Comments.Count;
             if (post == null)
             {
                 return Content(HttpStatusCode.NotFound, "پست با آیدی مورد نظر پیدا نشد");

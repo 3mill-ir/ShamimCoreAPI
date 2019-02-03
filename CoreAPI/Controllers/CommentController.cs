@@ -67,7 +67,7 @@ namespace CoreAPI.Controllers
         {
             List<CommentDataModel> _Commentlist = new List<CommentDataModel>();
             string userId = Tools.UserID();
-            var CommentList = await db.Comments.Where(u => u.F_UserID == userId ).ToListAsync();
+            var CommentList = await db.Comments.Include(w=>w.Posts).Where(u => u.F_UserID == userId ).ToListAsync();
 
             foreach (var m in CommentList)
             {
