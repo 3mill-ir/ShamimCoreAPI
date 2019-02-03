@@ -1,0 +1,2619 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MainDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AddressCity">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="isDeleted" Type="bit" />
+          <Property Name="F_StateID" Type="int" />
+        </EntityType>
+        <EntityType Name="AddressDistrict">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="isDeleted" Type="bit" />
+          <Property Name="F_CityID" Type="int" />
+        </EntityType>
+        <EntityType Name="AddressState">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AdminPanelConfig">
+          <Key>
+            <PropertyRef Name="F_UserID" />
+          </Key>
+          <Property Name="F_UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="FixedSidebar" Type="bit" />
+          <Property Name="SidebaronHover" Type="bit" />
+          <Property Name="SubmenuonHover" Type="bit" />
+          <Property Name="FixedTopbar" Type="bit" />
+          <Property Name="BoxedLayout" Type="bit" />
+          <Property Name="Color" Type="nvarchar(max)" />
+          <Property Name="Theme" Type="nvarchar(max)" />
+          <Property Name="BackGround" Type="nvarchar(max)" />
+          <Property Name="WebsiteTheme" Type="nvarchar(max)" />
+          <Property Name="WebsiteThemeLangs" Type="nvarchar(max)" />
+          <Property Name="WebSiteURL" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Attribute">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Weight" Type="float" />
+          <Property Name="F_AttributeGroupID" Type="int" />
+          <Property Name="Icon" Type="nvarchar(max)" />
+          <Property Name="ComponentType" Type="nvarchar(max)" />
+          <Property Name="TextColor" Type="nvarchar(max)" />
+          <Property Name="F_AttributeItemID" Type="int" />
+          <Property Name="Required" Type="bit" />
+        </EntityType>
+        <EntityType Name="AttributeGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Weight" Type="float" />
+          <Property Name="Image" Type="nvarchar(max)" />
+          <Property Name="F_AttributeGroupID" Type="int" />
+          <Property Name="Depth" Type="int" />
+          <Property Name="F_MenuID" Type="int" />
+        </EntityType>
+        <EntityType Name="AttributeItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="F_AttributeID" Type="int" />
+        </EntityType>
+        <EntityType Name="AttributeValue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" />
+          <Property Name="F_AttributeID" Type="int" />
+          <Property Name="F_AttributeItemID" Type="int" />
+          <Property Name="F_ItemID" Type="int" />
+        </EntityType>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatedDateOnUTC" Type="datetime" Nullable="false" />
+          <Property Name="Dispaly" Type="bit" Nullable="false" />
+          <Property Name="NumberOfReply" Type="int" />
+          <Property Name="NumberOfLikes" Type="int" />
+          <Property Name="NumberOfDislikes" Type="int" />
+          <Property Name="F_PostsID" Type="int" />
+          <Property Name="F_CommentsID" Type="int" />
+          <Property Name="F_UserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="IPAddress" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ComponentItemSetUp">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="F_ComponentID" Type="int" />
+          <Property Name="F_ItemID" Type="int" />
+          <Property Name="Type" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Weight" Type="float" />
+        </EntityType>
+        <EntityType Name="ComponentSetUp">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Component" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Weight" Type="float" />
+          <Property Name="F_UserID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Image" Type="nvarchar(max)" />
+          <Property Name="CreatedDateOnUTC" Type="datetime" />
+          <Property Name="SubmitedState" Type="nvarchar(max)" />
+          <Property Name="F_MenuID" Type="int" />
+          <Property Name="F_UserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="Type" Type="nvarchar(max)" />
+          <Property Name="NumberOfVisitors" Type="int" />
+          <Property Name="AdminDescription" Type="nvarchar(max)" />
+          <Property Name="Price" Type="varchar" MaxLength="50" />
+          <Property Name="Stock" Type="int" />
+        </EntityType>
+        <EntityType Name="ItemGallery">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar(max)" />
+          <Property Name="F_ItemID" Type="int" />
+        </EntityType>
+        <EntityType Name="Languages">
+          <Key>
+            <PropertyRef Name="Language" />
+          </Key>
+          <Property Name="Language" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="Image" Type="nvarchar(max)" />
+          <Property Name="isRTL" Type="bit" />
+          <Property Name="LanguageName" Type="nvarchar(max)" />
+          <Property Name="Weight" Type="float" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Weight" Type="float" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="Language" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="F_MenuID" Type="int" />
+          <Property Name="F_UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Image" Type="nvarchar(max)" />
+          <Property Name="Type" Type="varchar" MaxLength="50" />
+          <Property Name="MetaKeywords" Type="nvarchar(max)" />
+          <Property Name="MetaDescription" Type="nvarchar(max)" />
+          <Property Name="MetaTittle" Type="nvarchar(max)" />
+          <Property Name="MetaSeoName" Type="nvarchar(max)" />
+          <Property Name="DisplayInFooter" Type="bit" Nullable="false" />
+          <Property Name="DisplayInSidebar" Type="bit" Nullable="false" />
+          <Property Name="ActionContent" Type="nvarchar(max)" />
+          <Property Name="DisplayInTopbar" Type="bit" />
+        </EntityType>
+        <EntityType Name="PollAnswer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Text" Type="nvarchar(max)" />
+          <Property Name="AnswerKey" Type="int" />
+          <Property Name="Score" Type="int" />
+          <Property Name="F_PollQuestionID" Type="int" />
+          <Property Name="Color" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="PollLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IPAddress" Type="nvarchar(max)" />
+          <Property Name="F_UserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="Device" Type="nvarchar(max)" />
+          <Property Name="CreatedOnUTC" Type="datetime" />
+          <Property Name="F_PollAnswerID" Type="int" />
+        </EntityType>
+        <EntityType Name="PollQuestion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Question" Type="nvarchar(max)" />
+          <Property Name="CreatedOnUTC" Type="datetime" />
+          <Property Name="StartDateOnUTC" Type="datetime" />
+          <Property Name="EndDateOnUTC" Type="datetime" />
+          <Property Name="F_UserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="isDeleted" Type="bit" />
+          <Property Name="ChartType" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Posts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tittle" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Detail" Type="nvarchar(max)" />
+          <Property Name="ImagePath" Type="nvarchar(max)" />
+          <Property Name="isDeleted" Type="bit" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="F_UserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="F_MenuID" Type="int" />
+          <Property Name="NumberOfVisitors" Type="int" />
+          <Property Name="NumberOfComments" Type="int" />
+          <Property Name="NumberOfLikes" Type="int" />
+          <Property Name="NumberOfDislikes" Type="int" />
+          <Property Name="CreatedOnUTC" Type="datetime" />
+          <Property Name="MetaDescription" Type="nvarchar(max)" />
+          <Property Name="MetaTittle" Type="nvarchar(max)" />
+          <Property Name="MetaSeoName" Type="nvarchar(max)" />
+          <Property Name="ImageAlt" Type="nvarchar(max)" />
+          <Property Name="AllowComment" Type="bit" />
+          <Property Name="Language" Type="char" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="Roll_Mapping_RollGroupe">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="F_RollGroupeID" Type="nvarchar" MaxLength="128" />
+          <Property Name="F_RollID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="RollGroupe">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="GroupeName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Shekayat">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShakiFirstName" Type="nvarchar(max)" />
+          <Property Name="ShakiLastName" Type="nvarchar(max)" />
+          <Property Name="MotashakiFirstName" Type="nvarchar(max)" />
+          <Property Name="MotashakiLastName" Type="nvarchar(max)" />
+          <Property Name="ShakiSemat" Type="nvarchar(max)" />
+          <Property Name="MotashakiSemat" Type="nvarchar(max)" />
+          <Property Name="ShakiCodeMelli" Type="nvarchar(max)" />
+          <Property Name="MotashakiOstan" Type="nvarchar(max)" />
+          <Property Name="NoeErtebat" Type="nvarchar(max)" />
+          <Property Name="MotashakiHozeKhedmat" Type="nvarchar(max)" />
+          <Property Name="ShakiTell" Type="nvarchar(max)" />
+          <Property Name="ShakiMobile" Type="nvarchar(max)" />
+          <Property Name="ShakiAddress" Type="nvarchar(max)" />
+          <Property Name="TarikheName" Type="datetime" />
+          <Property Name="ShomareNaame" Type="nvarchar(max)" />
+          <Property Name="NaameMahaleMorajee" Type="nvarchar(max)" />
+          <Property Name="NatijeEghdameGhabli" Type="nvarchar(max)" />
+          <Property Name="LastUpdatedOnUTC" Type="datetime" />
+          <Property Name="Subject" Type="nvarchar(max)" />
+          <Property Name="F_UserID" Type="nvarchar(max)" />
+          <Property Name="TrackingCode" Type="nvarchar" MaxLength="20" />
+          <Property Name="Status" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ShekayatInboxOutBox">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Text" Type="nvarchar(max)" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedDateOnUtc" Type="datetime" />
+          <Property Name="F_ShekayatID" Type="int" />
+        </EntityType>
+        <EntityType Name="Shop">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="F_UserID" Type="nvarchar(max)" />
+          <Property Name="TotalPrice" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedDateOnUtc" Type="datetime" />
+          <Property Name="Payed" Type="bit" />
+          <Property Name="PayType" Type="nvarchar(max)" />
+          <Property Name="DeliveryType" Type="nvarchar(max)" />
+          <Property Name="DeliveryCost" Type="nvarchar(max)" />
+          <Property Name="DeliveryTime" Type="datetime" />
+          <Property Name="OrderedDate" Type="datetime" />
+          <Property Name="TransactionNumber" Type="nvarchar(max)" />
+          <Property Name="ParentUserID" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ShopItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="F_ItemID" Type="int" />
+          <Property Name="F_ShopID" Type="int" />
+          <Property Name="Count" Type="int" />
+          <Property Name="CreatedDateOnUtc" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Tags">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="F_UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tags_Posts_Mapping">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="F_TagsID" Type="int" Nullable="false" />
+          <Property Name="F_PostsID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="nvarchar(max)" />
+          <Property Name="LastUpdatedOnUTC" Type="datetime" />
+          <Property Name="TrackingCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="F_UserID" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TicketInbox">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TicketContent" Type="nvarchar(max)" />
+          <Property Name="CreatedOnUTC" Type="datetime" />
+          <Property Name="TicketType" Type="nvarchar(max)" />
+          <Property Name="TicketFrom" Type="nvarchar(max)" />
+          <Property Name="F_TicketID" Type="int" />
+        </EntityType>
+        <EntityType Name="TicketInboxMedia">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MediaPath" Type="nvarchar(max)" />
+          <Property Name="MediaType" Type="nvarchar(max)" />
+          <Property Name="F_TicketInboxID" Type="int" />
+        </EntityType>
+        <EntityType Name="TicketLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Device" Type="nvarchar(max)" />
+          <Property Name="CreatedOnUTC" Type="datetime" />
+          <Property Name="F_TicketInboxID" Type="int" />
+        </EntityType>
+        <EntityType Name="TicketOutBox">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Content_One" Type="nvarchar(max)" />
+          <Property Name="IsRead" Type="bit" />
+          <Property Name="SMSText" Type="nvarchar(max)" />
+          <Property Name="SMSStatusOne" Type="nvarchar(max)" />
+          <Property Name="SMSStatusTwo" Type="nvarchar(max)" />
+          <Property Name="CreatedOnUTC" Type="datetime" />
+          <Property Name="F_TicketInboxID" Type="int" />
+          <Property Name="UserRole" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="UserInformation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="F_UserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="F_CityID" Type="int" />
+          <Property Name="CodeMelli" Type="nvarchar(max)" />
+          <Property Name="F_ParrentUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Tell" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="UserRollMapping">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="F_UserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="F_RollID" Type="nvarchar" MaxLength="128" />
+          <Property Name="F_RollGroupeID" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="RootUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="AccountType" Type="varchar(max)" />
+        </EntityType>
+        <Association Name="FK__Component__F_Com__245D67DE">
+          <End Role="ComponentSetUp" Type="Self.ComponentSetUp" Multiplicity="0..1" />
+          <End Role="ComponentItemSetUp" Type="Self.ComponentItemSetUp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ComponentSetUp">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ComponentItemSetUp">
+              <PropertyRef Name="F_ComponentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AddressCity_AddressState">
+          <End Role="AddressState" Type="Self.AddressState" Multiplicity="0..1" />
+          <End Role="AddressCity" Type="Self.AddressCity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AddressState">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AddressCity">
+              <PropertyRef Name="F_StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AddressDistrict_AddressCity">
+          <End Role="AddressCity" Type="Self.AddressCity" Multiplicity="0..1" />
+          <End Role="AddressDistrict" Type="Self.AddressDistrict" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AddressCity">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AddressDistrict">
+              <PropertyRef Name="F_CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Attribute_AttributeGroup">
+          <End Role="AttributeGroup" Type="Self.AttributeGroup" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Attribute" Type="Self.Attribute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttributeGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Attribute">
+              <PropertyRef Name="F_AttributeGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Attribute_AttributeItem">
+          <End Role="AttributeItem" Type="Self.AttributeItem" Multiplicity="0..1" />
+          <End Role="Attribute" Type="Self.Attribute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttributeItem">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Attribute">
+              <PropertyRef Name="F_AttributeItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttributeGroup_AttributeGroup">
+          <End Role="AttributeGroup" Type="Self.AttributeGroup" Multiplicity="0..1" />
+          <End Role="AttributeGroup1" Type="Self.AttributeGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttributeGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AttributeGroup1">
+              <PropertyRef Name="F_AttributeGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttributeGroup_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="AttributeGroup" Type="Self.AttributeGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AttributeGroup">
+              <PropertyRef Name="F_MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttributeItem_Attribute">
+          <End Role="Attribute" Type="Self.Attribute" Multiplicity="0..1" />
+          <End Role="AttributeItem" Type="Self.AttributeItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attribute">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AttributeItem">
+              <PropertyRef Name="F_AttributeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttributeValue_Attribute">
+          <End Role="Attribute" Type="Self.Attribute" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AttributeValue" Type="Self.AttributeValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attribute">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AttributeValue">
+              <PropertyRef Name="F_AttributeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttributeValue_AttributeItem">
+          <End Role="AttributeItem" Type="Self.AttributeItem" Multiplicity="0..1" />
+          <End Role="AttributeValue" Type="Self.AttributeValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttributeItem">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AttributeValue">
+              <PropertyRef Name="F_AttributeItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttributeValue_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
+          <End Role="AttributeValue" Type="Self.AttributeValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AttributeValue">
+              <PropertyRef Name="F_ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Comments">
+          <End Role="Comments" Type="Self.Comments" Multiplicity="0..1" />
+          <End Role="Comments1" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comments">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Comments1">
+              <PropertyRef Name="F_CommentsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Posts">
+          <End Role="Posts" Type="Self.Posts" Multiplicity="0..1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="F_PostsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="F_MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemGallery_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
+          <End Role="ItemGallery" Type="Self.ItemGallery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemGallery">
+              <PropertyRef Name="F_ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="Menu1" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Menu1">
+              <PropertyRef Name="F_MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PollAnswer_PollQuestion">
+          <End Role="PollQuestion" Type="Self.PollQuestion" Multiplicity="0..1" />
+          <End Role="PollAnswer" Type="Self.PollAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PollQuestion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PollAnswer">
+              <PropertyRef Name="F_PollQuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PollLog_PollAnswer">
+          <End Role="PollAnswer" Type="Self.PollAnswer" Multiplicity="0..1" />
+          <End Role="PollLog" Type="Self.PollLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PollAnswer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PollLog">
+              <PropertyRef Name="F_PollAnswerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posts_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="Posts" Type="Self.Posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="F_MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Roll_Mapping_RollGroupe_AspNetRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="0..1" />
+          <End Role="Roll_Mapping_RollGroupe" Type="Self.Roll_Mapping_RollGroupe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Roll_Mapping_RollGroupe">
+              <PropertyRef Name="F_RollID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Roll_Mapping_RollGroupe_RollGroupe">
+          <End Role="RollGroupe" Type="Self.RollGroupe" Multiplicity="0..1" />
+          <End Role="Roll_Mapping_RollGroupe" Type="Self.Roll_Mapping_RollGroupe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RollGroupe">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Roll_Mapping_RollGroupe">
+              <PropertyRef Name="F_RollGroupeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShekayatInboxOutBox_Shekayat">
+          <End Role="Shekayat" Type="Self.Shekayat" Multiplicity="0..1" />
+          <End Role="ShekayatInboxOutBox" Type="Self.ShekayatInboxOutBox" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shekayat">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ShekayatInboxOutBox">
+              <PropertyRef Name="F_ShekayatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShopItem_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
+          <End Role="ShopItem" Type="Self.ShopItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ShopItem">
+              <PropertyRef Name="F_ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShopItem_Shop">
+          <End Role="Shop" Type="Self.Shop" Multiplicity="0..1" />
+          <End Role="ShopItem" Type="Self.ShopItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shop">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ShopItem">
+              <PropertyRef Name="F_ShopID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tags_Posts_Mapping_Posts">
+          <End Role="Posts" Type="Self.Posts" Multiplicity="1" />
+          <End Role="Tags_Posts_Mapping" Type="Self.Tags_Posts_Mapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tags_Posts_Mapping">
+              <PropertyRef Name="F_PostsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tags_Posts_Mapping_Tags">
+          <End Role="Tags" Type="Self.Tags" Multiplicity="1" />
+          <End Role="Tags_Posts_Mapping" Type="Self.Tags_Posts_Mapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tags">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tags_Posts_Mapping">
+              <PropertyRef Name="F_TagsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketInbox_Ticket">
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="0..1" />
+          <End Role="TicketInbox" Type="Self.TicketInbox" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ticket">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TicketInbox">
+              <PropertyRef Name="F_TicketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketInboxMedia_TicketInbox">
+          <End Role="TicketInbox" Type="Self.TicketInbox" Multiplicity="0..1" />
+          <End Role="TicketInboxMedia" Type="Self.TicketInboxMedia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketInbox">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TicketInboxMedia">
+              <PropertyRef Name="F_TicketInboxID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketLog_TicketInbox">
+          <End Role="TicketInbox" Type="Self.TicketInbox" Multiplicity="0..1" />
+          <End Role="TicketLog" Type="Self.TicketLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketInbox">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TicketLog">
+              <PropertyRef Name="F_TicketInboxID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketOutBox_TicketInbox">
+          <End Role="TicketInbox" Type="Self.TicketInbox" Multiplicity="0..1" />
+          <End Role="TicketOutBox" Type="Self.TicketOutBox" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketInbox">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TicketOutBox">
+              <PropertyRef Name="F_TicketInboxID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRollMapping_AspNetRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="0..1" />
+          <End Role="UserRollMapping" Type="Self.UserRollMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRollMapping">
+              <PropertyRef Name="F_RollID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRollMapping_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="UserRollMapping" Type="Self.UserRollMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRollMapping">
+              <PropertyRef Name="F_UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRollMapping_RollGroupe">
+          <End Role="RollGroupe" Type="Self.RollGroupe" Multiplicity="0..1" />
+          <End Role="UserRollMapping" Type="Self.UserRollMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RollGroupe">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserRollMapping">
+              <PropertyRef Name="F_RollGroupeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MainDBModelStoreContainer">
+          <EntitySet Name="AddressCity" EntityType="Self.AddressCity" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="AddressDistrict" EntityType="Self.AddressDistrict" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="AddressState" EntityType="Self.AddressState" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="AdminPanelConfig" EntityType="Self.AdminPanelConfig" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="Attribute" EntityType="Self.Attribute" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="AttributeGroup" EntityType="Self.AttributeGroup" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="AttributeItem" EntityType="Self.AttributeItem" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="AttributeValue" EntityType="Self.AttributeValue" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="Comments" EntityType="Self.Comments" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="ComponentItemSetUp" EntityType="Self.ComponentItemSetUp" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="ComponentSetUp" EntityType="Self.ComponentSetUp" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="Item" EntityType="Self.Item" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="ItemGallery" EntityType="Self.ItemGallery" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="Languages" EntityType="Self.Languages" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="PollAnswer" EntityType="Self.PollAnswer" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="PollLog" EntityType="Self.PollLog" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="PollQuestion" EntityType="Self.PollQuestion" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="Posts" EntityType="Self.Posts" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="Roll_Mapping_RollGroupe" EntityType="Self.Roll_Mapping_RollGroupe" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="RollGroupe" EntityType="Self.RollGroupe" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="Shekayat" EntityType="Self.Shekayat" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="ShekayatInboxOutBox" EntityType="Self.ShekayatInboxOutBox" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="Shop" EntityType="Self.Shop" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="ShopItem" EntityType="Self.ShopItem" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="Tags" EntityType="Self.Tags" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="Tags_Posts_Mapping" EntityType="Self.Tags_Posts_Mapping" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="TicketInbox" EntityType="Self.TicketInbox" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="TicketInboxMedia" EntityType="Self.TicketInboxMedia" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="TicketLog" EntityType="Self.TicketLog" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="TicketOutBox" EntityType="Self.TicketOutBox" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="UserInformation" EntityType="Self.UserInformation" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="UserRollMapping" EntityType="Self.UserRollMapping" Schema="11228_parkUser" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Component__F_Com__245D67DE" Association="Self.FK__Component__F_Com__245D67DE">
+            <End Role="ComponentSetUp" EntitySet="ComponentSetUp" />
+            <End Role="ComponentItemSetUp" EntitySet="ComponentItemSetUp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AddressCity_AddressState" Association="Self.FK_AddressCity_AddressState">
+            <End Role="AddressState" EntitySet="AddressState" />
+            <End Role="AddressCity" EntitySet="AddressCity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AddressDistrict_AddressCity" Association="Self.FK_AddressDistrict_AddressCity">
+            <End Role="AddressCity" EntitySet="AddressCity" />
+            <End Role="AddressDistrict" EntitySet="AddressDistrict" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Attribute_AttributeGroup" Association="Self.FK_Attribute_AttributeGroup">
+            <End Role="AttributeGroup" EntitySet="AttributeGroup" />
+            <End Role="Attribute" EntitySet="Attribute" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Attribute_AttributeItem" Association="Self.FK_Attribute_AttributeItem">
+            <End Role="AttributeItem" EntitySet="AttributeItem" />
+            <End Role="Attribute" EntitySet="Attribute" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttributeGroup_AttributeGroup" Association="Self.FK_AttributeGroup_AttributeGroup">
+            <End Role="AttributeGroup" EntitySet="AttributeGroup" />
+            <End Role="AttributeGroup1" EntitySet="AttributeGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttributeGroup_Menu" Association="Self.FK_AttributeGroup_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="AttributeGroup" EntitySet="AttributeGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttributeItem_Attribute" Association="Self.FK_AttributeItem_Attribute">
+            <End Role="Attribute" EntitySet="Attribute" />
+            <End Role="AttributeItem" EntitySet="AttributeItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttributeValue_Attribute" Association="Self.FK_AttributeValue_Attribute">
+            <End Role="Attribute" EntitySet="Attribute" />
+            <End Role="AttributeValue" EntitySet="AttributeValue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttributeValue_AttributeItem" Association="Self.FK_AttributeValue_AttributeItem">
+            <End Role="AttributeItem" EntitySet="AttributeItem" />
+            <End Role="AttributeValue" EntitySet="AttributeValue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttributeValue_Item" Association="Self.FK_AttributeValue_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="AttributeValue" EntitySet="AttributeValue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Comments" Association="Self.FK_Comments_Comments">
+            <End Role="Comments" EntitySet="Comments" />
+            <End Role="Comments1" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Posts" Association="Self.FK_Comments_Posts">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Menu" Association="Self.FK_Item_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemGallery_Item" Association="Self.FK_ItemGallery_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="ItemGallery" EntitySet="ItemGallery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_Menu" Association="Self.FK_Menu_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Menu1" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PollAnswer_PollQuestion" Association="Self.FK_PollAnswer_PollQuestion">
+            <End Role="PollQuestion" EntitySet="PollQuestion" />
+            <End Role="PollAnswer" EntitySet="PollAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PollLog_PollAnswer" Association="Self.FK_PollLog_PollAnswer">
+            <End Role="PollAnswer" EntitySet="PollAnswer" />
+            <End Role="PollLog" EntitySet="PollLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posts_Menu" Association="Self.FK_Posts_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Roll_Mapping_RollGroupe_AspNetRoles" Association="Self.FK_Roll_Mapping_RollGroupe_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="Roll_Mapping_RollGroupe" EntitySet="Roll_Mapping_RollGroupe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Roll_Mapping_RollGroupe_RollGroupe" Association="Self.FK_Roll_Mapping_RollGroupe_RollGroupe">
+            <End Role="RollGroupe" EntitySet="RollGroupe" />
+            <End Role="Roll_Mapping_RollGroupe" EntitySet="Roll_Mapping_RollGroupe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShekayatInboxOutBox_Shekayat" Association="Self.FK_ShekayatInboxOutBox_Shekayat">
+            <End Role="Shekayat" EntitySet="Shekayat" />
+            <End Role="ShekayatInboxOutBox" EntitySet="ShekayatInboxOutBox" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShopItem_Item" Association="Self.FK_ShopItem_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="ShopItem" EntitySet="ShopItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShopItem_Shop" Association="Self.FK_ShopItem_Shop">
+            <End Role="Shop" EntitySet="Shop" />
+            <End Role="ShopItem" EntitySet="ShopItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tags_Posts_Mapping_Posts" Association="Self.FK_Tags_Posts_Mapping_Posts">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="Tags_Posts_Mapping" EntitySet="Tags_Posts_Mapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tags_Posts_Mapping_Tags" Association="Self.FK_Tags_Posts_Mapping_Tags">
+            <End Role="Tags" EntitySet="Tags" />
+            <End Role="Tags_Posts_Mapping" EntitySet="Tags_Posts_Mapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketInbox_Ticket" Association="Self.FK_TicketInbox_Ticket">
+            <End Role="Ticket" EntitySet="Ticket" />
+            <End Role="TicketInbox" EntitySet="TicketInbox" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketInboxMedia_TicketInbox" Association="Self.FK_TicketInboxMedia_TicketInbox">
+            <End Role="TicketInbox" EntitySet="TicketInbox" />
+            <End Role="TicketInboxMedia" EntitySet="TicketInboxMedia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketLog_TicketInbox" Association="Self.FK_TicketLog_TicketInbox">
+            <End Role="TicketInbox" EntitySet="TicketInbox" />
+            <End Role="TicketLog" EntitySet="TicketLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketOutBox_TicketInbox" Association="Self.FK_TicketOutBox_TicketInbox">
+            <End Role="TicketInbox" EntitySet="TicketInbox" />
+            <End Role="TicketOutBox" EntitySet="TicketOutBox" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRollMapping_AspNetRoles" Association="Self.FK_UserRollMapping_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="UserRollMapping" EntitySet="UserRollMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRollMapping_AspNetUsers" Association="Self.FK_UserRollMapping_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserRollMapping" EntitySet="UserRollMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRollMapping_RollGroupe" Association="Self.FK_UserRollMapping_RollGroupe">
+            <End Role="RollGroupe" EntitySet="RollGroupe" />
+            <End Role="UserRollMapping" EntitySet="UserRollMapping" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MainDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AddressCity">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="isDeleted" Type="Boolean" />
+          <Property Name="F_StateID" Type="Int32" />
+          <NavigationProperty Name="AddressState" Relationship="Self.FK_AddressCity_AddressState" FromRole="AddressCity" ToRole="AddressState" />
+          <NavigationProperty Name="AddressDistrict" Relationship="Self.FK_AddressDistrict_AddressCity" FromRole="AddressCity" ToRole="AddressDistrict" />
+        </EntityType>
+        <EntityType Name="AddressDistrict">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="isDeleted" Type="Boolean" />
+          <Property Name="F_CityID" Type="Int32" />
+          <NavigationProperty Name="AddressCity" Relationship="Self.FK_AddressDistrict_AddressCity" FromRole="AddressDistrict" ToRole="AddressCity" />
+        </EntityType>
+        <EntityType Name="AddressState">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AddressCity" Relationship="Self.FK_AddressCity_AddressState" FromRole="AddressState" ToRole="AddressCity" />
+        </EntityType>
+        <EntityType Name="AdminPanelConfig">
+          <Key>
+            <PropertyRef Name="F_UserID" />
+          </Key>
+          <Property Name="F_UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FixedSidebar" Type="Boolean" />
+          <Property Name="SidebaronHover" Type="Boolean" />
+          <Property Name="SubmenuonHover" Type="Boolean" />
+          <Property Name="FixedTopbar" Type="Boolean" />
+          <Property Name="BoxedLayout" Type="Boolean" />
+          <Property Name="Color" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Theme" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BackGround" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WebsiteTheme" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WebsiteThemeLangs" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WebSiteURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Attribute">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Weight" Type="Double" />
+          <Property Name="F_AttributeGroupID" Type="Int32" />
+          <Property Name="Icon" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ComponentType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TextColor" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="F_AttributeItemID" Type="Int32" />
+          <Property Name="Required" Type="Boolean" />
+          <NavigationProperty Name="AttributeGroup" Relationship="Self.FK_Attribute_AttributeGroup" FromRole="Attribute" ToRole="AttributeGroup" />
+          <NavigationProperty Name="AttributeItem" Relationship="Self.FK_Attribute_AttributeItem" FromRole="Attribute" ToRole="AttributeItem" />
+          <NavigationProperty Name="AttributeItem1" Relationship="Self.FK_AttributeItem_Attribute" FromRole="Attribute" ToRole="AttributeItem" />
+          <NavigationProperty Name="AttributeValue" Relationship="Self.FK_AttributeValue_Attribute" FromRole="Attribute" ToRole="AttributeValue" />
+        </EntityType>
+        <EntityType Name="AttributeGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Weight" Type="Double" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="F_AttributeGroupID" Type="Int32" />
+          <Property Name="Depth" Type="Int32" />
+          <Property Name="F_MenuID" Type="Int32" />
+          <NavigationProperty Name="Attribute" Relationship="Self.FK_Attribute_AttributeGroup" FromRole="AttributeGroup" ToRole="Attribute" />
+          <NavigationProperty Name="AttributeGroup1" Relationship="Self.FK_AttributeGroup_AttributeGroup" FromRole="AttributeGroup" ToRole="AttributeGroup1" />
+          <NavigationProperty Name="AttributeGroup2" Relationship="Self.FK_AttributeGroup_AttributeGroup" FromRole="AttributeGroup1" ToRole="AttributeGroup" />
+          <NavigationProperty Name="Menu" Relationship="Self.FK_AttributeGroup_Menu" FromRole="AttributeGroup" ToRole="Menu" />
+        </EntityType>
+        <EntityType Name="AttributeItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="F_AttributeID" Type="Int32" />
+          <NavigationProperty Name="Attribute" Relationship="Self.FK_Attribute_AttributeItem" FromRole="AttributeItem" ToRole="Attribute" />
+          <NavigationProperty Name="Attribute1" Relationship="Self.FK_AttributeItem_Attribute" FromRole="AttributeItem" ToRole="Attribute" />
+          <NavigationProperty Name="AttributeValue" Relationship="Self.FK_AttributeValue_AttributeItem" FromRole="AttributeItem" ToRole="AttributeValue" />
+        </EntityType>
+        <EntityType Name="AttributeValue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="F_AttributeID" Type="Int32" />
+          <Property Name="F_AttributeItemID" Type="Int32" />
+          <Property Name="F_ItemID" Type="Int32" />
+          <NavigationProperty Name="Attribute" Relationship="Self.FK_AttributeValue_Attribute" FromRole="AttributeValue" ToRole="Attribute" />
+          <NavigationProperty Name="AttributeItem" Relationship="Self.FK_AttributeValue_AttributeItem" FromRole="AttributeValue" ToRole="AttributeItem" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_AttributeValue_Item" FromRole="AttributeValue" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedDateOnUTC" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Dispaly" Type="Boolean" Nullable="false" />
+          <Property Name="NumberOfReply" Type="Int32" />
+          <Property Name="NumberOfLikes" Type="Int32" />
+          <Property Name="NumberOfDislikes" Type="Int32" />
+          <Property Name="F_PostsID" Type="Int32" />
+          <Property Name="F_CommentsID" Type="Int32" />
+          <Property Name="F_UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IPAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Comments1" Relationship="Self.FK_Comments_Comments" FromRole="Comments" ToRole="Comments1" />
+          <NavigationProperty Name="Comments2" Relationship="Self.FK_Comments_Comments" FromRole="Comments1" ToRole="Comments" />
+          <NavigationProperty Name="Posts" Relationship="Self.FK_Comments_Posts" FromRole="Comments" ToRole="Posts" />
+        </EntityType>
+        <EntityType Name="ComponentItemSetUp">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="F_ComponentID" Type="Int32" />
+          <Property Name="F_ItemID" Type="Int32" />
+          <Property Name="Type" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Weight" Type="Double" />
+          <NavigationProperty Name="ComponentSetUp" Relationship="Self.FK__Component__F_Com__245D67DE" FromRole="ComponentItemSetUp" ToRole="ComponentSetUp" />
+        </EntityType>
+        <EntityType Name="ComponentSetUp">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Component" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Weight" Type="Double" />
+          <Property Name="F_UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ComponentItemSetUp" Relationship="Self.FK__Component__F_Com__245D67DE" FromRole="ComponentSetUp" ToRole="ComponentItemSetUp" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDateOnUTC" Type="DateTime" Precision="3" />
+          <Property Name="SubmitedState" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="F_MenuID" Type="Int32" />
+          <Property Name="F_UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NumberOfVisitors" Type="Int32" />
+          <Property Name="AdminDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Stock" Type="Int32" />
+          <NavigationProperty Name="AttributeValue" Relationship="Self.FK_AttributeValue_Item" FromRole="Item" ToRole="AttributeValue" />
+          <NavigationProperty Name="Menu" Relationship="Self.FK_Item_Menu" FromRole="Item" ToRole="Menu" />
+          <NavigationProperty Name="ItemGallery" Relationship="Self.FK_ItemGallery_Item" FromRole="Item" ToRole="ItemGallery" />
+          <NavigationProperty Name="ShopItem" Relationship="Self.FK_ShopItem_Item" FromRole="Item" ToRole="ShopItem" />
+        </EntityType>
+        <EntityType Name="ItemGallery">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="F_ItemID" Type="Int32" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_ItemGallery_Item" FromRole="ItemGallery" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="Languages">
+          <Key>
+            <PropertyRef Name="Language" />
+          </Key>
+          <Property Name="Language" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="isRTL" Type="Boolean" />
+          <Property Name="LanguageName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Weight" Type="Double" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Weight" Type="Double" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="Language" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="F_MenuID" Type="Int32" />
+          <Property Name="F_UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MetaKeywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MetaDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MetaTittle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MetaSeoName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayInFooter" Type="Boolean" Nullable="false" />
+          <Property Name="DisplayInSidebar" Type="Boolean" Nullable="false" />
+          <Property Name="ActionContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayInTopbar" Type="Boolean" />
+          <NavigationProperty Name="AttributeGroup" Relationship="Self.FK_AttributeGroup_Menu" FromRole="Menu" ToRole="AttributeGroup" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_Item_Menu" FromRole="Menu" ToRole="Item" />
+          <NavigationProperty Name="Menu1" Relationship="Self.FK_Menu_Menu" FromRole="Menu" ToRole="Menu1" />
+          <NavigationProperty Name="Menu2" Relationship="Self.FK_Menu_Menu" FromRole="Menu1" ToRole="Menu" />
+          <NavigationProperty Name="Posts" Relationship="Self.FK_Posts_Menu" FromRole="Menu" ToRole="Posts" />
+        </EntityType>
+        <EntityType Name="PollAnswer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AnswerKey" Type="Int32" />
+          <Property Name="Score" Type="Int32" />
+          <Property Name="F_PollQuestionID" Type="Int32" />
+          <Property Name="Color" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PollQuestion" Relationship="Self.FK_PollAnswer_PollQuestion" FromRole="PollAnswer" ToRole="PollQuestion" />
+          <NavigationProperty Name="PollLog" Relationship="Self.FK_PollLog_PollAnswer" FromRole="PollAnswer" ToRole="PollLog" />
+        </EntityType>
+        <EntityType Name="PollLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IPAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="F_UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Device" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOnUTC" Type="DateTime" Precision="3" />
+          <Property Name="F_PollAnswerID" Type="Int32" />
+          <NavigationProperty Name="PollAnswer" Relationship="Self.FK_PollLog_PollAnswer" FromRole="PollLog" ToRole="PollAnswer" />
+        </EntityType>
+        <EntityType Name="PollQuestion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOnUTC" Type="DateTime" Precision="3" />
+          <Property Name="StartDateOnUTC" Type="DateTime" Precision="3" />
+          <Property Name="EndDateOnUTC" Type="DateTime" Precision="3" />
+          <Property Name="F_UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="isDeleted" Type="Boolean" />
+          <Property Name="ChartType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PollAnswer" Relationship="Self.FK_PollAnswer_PollQuestion" FromRole="PollQuestion" ToRole="PollAnswer" />
+        </EntityType>
+        <EntityType Name="Posts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tittle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="isDeleted" Type="Boolean" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="F_UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="F_MenuID" Type="Int32" />
+          <Property Name="NumberOfVisitors" Type="Int32" />
+          <Property Name="NumberOfComments" Type="Int32" />
+          <Property Name="NumberOfLikes" Type="Int32" />
+          <Property Name="NumberOfDislikes" Type="Int32" />
+          <Property Name="CreatedOnUTC" Type="DateTime" Precision="3" />
+          <Property Name="MetaDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MetaTittle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MetaSeoName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageAlt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AllowComment" Type="Boolean" />
+          <Property Name="Language" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_Comments_Posts" FromRole="Posts" ToRole="Comments" />
+          <NavigationProperty Name="Menu" Relationship="Self.FK_Posts_Menu" FromRole="Posts" ToRole="Menu" />
+          <NavigationProperty Name="Tags_Posts_Mapping" Relationship="Self.FK_Tags_Posts_Mapping_Posts" FromRole="Posts" ToRole="Tags_Posts_Mapping" />
+        </EntityType>
+        <EntityType Name="Roll_Mapping_RollGroupe">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="F_RollGroupeID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="F_RollID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.FK_Roll_Mapping_RollGroupe_AspNetRoles" FromRole="Roll_Mapping_RollGroupe" ToRole="AspNetRoles" />
+          <NavigationProperty Name="RollGroupe" Relationship="Self.FK_Roll_Mapping_RollGroupe_RollGroupe" FromRole="Roll_Mapping_RollGroupe" ToRole="RollGroupe" />
+        </EntityType>
+        <EntityType Name="RollGroupe">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GroupeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Roll_Mapping_RollGroupe" Relationship="Self.FK_Roll_Mapping_RollGroupe_RollGroupe" FromRole="RollGroupe" ToRole="Roll_Mapping_RollGroupe" />
+          <NavigationProperty Name="UserRollMapping" Relationship="Self.FK_UserRollMapping_RollGroupe" FromRole="RollGroupe" ToRole="UserRollMapping" />
+        </EntityType>
+        <EntityType Name="Shekayat">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShakiFirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ShakiLastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MotashakiFirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MotashakiLastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ShakiSemat" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MotashakiSemat" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ShakiCodeMelli" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MotashakiOstan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NoeErtebat" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MotashakiHozeKhedmat" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ShakiTell" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ShakiMobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ShakiAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TarikheName" Type="DateTime" Precision="3" />
+          <Property Name="ShomareNaame" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NaameMahaleMorajee" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NatijeEghdameGhabli" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedOnUTC" Type="DateTime" Precision="3" />
+          <Property Name="Subject" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="F_UserID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TrackingCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ShekayatInboxOutBox" Relationship="Self.FK_ShekayatInboxOutBox_Shekayat" FromRole="Shekayat" ToRole="ShekayatInboxOutBox" />
+        </EntityType>
+        <EntityType Name="ShekayatInboxOutBox">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDateOnUtc" Type="DateTime" Precision="3" />
+          <Property Name="F_ShekayatID" Type="Int32" />
+          <NavigationProperty Name="Shekayat" Relationship="Self.FK_ShekayatInboxOutBox_Shekayat" FromRole="ShekayatInboxOutBox" ToRole="Shekayat" />
+        </EntityType>
+        <EntityType Name="Shop">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="F_UserID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TotalPrice" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDateOnUtc" Type="DateTime" Precision="3" />
+          <Property Name="Payed" Type="Boolean" />
+          <Property Name="PayType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DeliveryType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DeliveryCost" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DeliveryTime" Type="DateTime" Precision="3" />
+          <Property Name="OrderedDate" Type="DateTime" Precision="3" />
+          <Property Name="TransactionNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ParentUserID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ShopItem" Relationship="Self.FK_ShopItem_Shop" FromRole="Shop" ToRole="ShopItem" />
+        </EntityType>
+        <EntityType Name="ShopItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="F_ItemID" Type="Int32" />
+          <Property Name="F_ShopID" Type="Int32" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="CreatedDateOnUtc" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_ShopItem_Item" FromRole="ShopItem" ToRole="Item" />
+          <NavigationProperty Name="Shop" Relationship="Self.FK_ShopItem_Shop" FromRole="ShopItem" ToRole="Shop" />
+        </EntityType>
+        <EntityType Name="Tags">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="F_UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tags_Posts_Mapping" Relationship="Self.FK_Tags_Posts_Mapping_Tags" FromRole="Tags" ToRole="Tags_Posts_Mapping" />
+        </EntityType>
+        <EntityType Name="Tags_Posts_Mapping">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="F_TagsID" Type="Int32" Nullable="false" />
+          <Property Name="F_PostsID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Posts" Relationship="Self.FK_Tags_Posts_Mapping_Posts" FromRole="Tags_Posts_Mapping" ToRole="Posts" />
+          <NavigationProperty Name="Tags" Relationship="Self.FK_Tags_Posts_Mapping_Tags" FromRole="Tags_Posts_Mapping" ToRole="Tags" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedOnUTC" Type="DateTime" Precision="3" />
+          <Property Name="TrackingCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F_UserID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TicketInbox" Relationship="Self.FK_TicketInbox_Ticket" FromRole="Ticket" ToRole="TicketInbox" />
+        </EntityType>
+        <EntityType Name="TicketInbox">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TicketContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOnUTC" Type="DateTime" Precision="3" />
+          <Property Name="TicketType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TicketFrom" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="F_TicketID" Type="Int32" />
+          <NavigationProperty Name="Ticket" Relationship="Self.FK_TicketInbox_Ticket" FromRole="TicketInbox" ToRole="Ticket" />
+          <NavigationProperty Name="TicketInboxMedia" Relationship="Self.FK_TicketInboxMedia_TicketInbox" FromRole="TicketInbox" ToRole="TicketInboxMedia" />
+          <NavigationProperty Name="TicketLog" Relationship="Self.FK_TicketLog_TicketInbox" FromRole="TicketInbox" ToRole="TicketLog" />
+          <NavigationProperty Name="TicketOutBox" Relationship="Self.FK_TicketOutBox_TicketInbox" FromRole="TicketInbox" ToRole="TicketOutBox" />
+        </EntityType>
+        <EntityType Name="TicketInboxMedia">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MediaPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MediaType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="F_TicketInboxID" Type="Int32" />
+          <NavigationProperty Name="TicketInbox" Relationship="Self.FK_TicketInboxMedia_TicketInbox" FromRole="TicketInboxMedia" ToRole="TicketInbox" />
+        </EntityType>
+        <EntityType Name="TicketLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Device" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOnUTC" Type="DateTime" Precision="3" />
+          <Property Name="F_TicketInboxID" Type="Int32" />
+          <NavigationProperty Name="TicketInbox" Relationship="Self.FK_TicketLog_TicketInbox" FromRole="TicketLog" ToRole="TicketInbox" />
+        </EntityType>
+        <EntityType Name="TicketOutBox">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Content_One" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsRead" Type="Boolean" />
+          <Property Name="SMSText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SMSStatusOne" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SMSStatusTwo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOnUTC" Type="DateTime" Precision="3" />
+          <Property Name="F_TicketInboxID" Type="Int32" />
+          <Property Name="UserRole" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TicketInbox" Relationship="Self.FK_TicketOutBox_TicketInbox" FromRole="TicketOutBox" ToRole="TicketInbox" />
+        </EntityType>
+        <EntityType Name="UserInformation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="F_UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="F_CityID" Type="Int32" />
+          <Property Name="CodeMelli" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="F_ParrentUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Tell" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UserRollMapping">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="F_UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="F_RollID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="F_RollGroupeID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="RollGroupe" Relationship="Self.FK_UserRollMapping_RollGroupe" FromRole="UserRollMapping" ToRole="RollGroupe" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.FK_UserRollMapping_AspNetRoles" FromRole="UserRollMapping" ToRole="AspNetRoles" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_UserRollMapping_AspNetUsers" FromRole="UserRollMapping" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Roll_Mapping_RollGroupe" Relationship="Self.FK_Roll_Mapping_RollGroupe_AspNetRoles" FromRole="AspNetRoles" ToRole="Roll_Mapping_RollGroupe" />
+          <NavigationProperty Name="UserRollMapping" Relationship="Self.FK_UserRollMapping_AspNetRoles" FromRole="AspNetRoles" ToRole="UserRollMapping" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RootUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="AccountType" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserRollMapping" Relationship="Self.FK_UserRollMapping_AspNetUsers" FromRole="AspNetUsers" ToRole="UserRollMapping" />
+        </EntityType>
+        <Association Name="FK_AddressCity_AddressState">
+          <End Role="AddressState" Type="Self.AddressState" Multiplicity="0..1" />
+          <End Role="AddressCity" Type="Self.AddressCity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AddressState">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AddressCity">
+              <PropertyRef Name="F_StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AddressDistrict_AddressCity">
+          <End Role="AddressCity" Type="Self.AddressCity" Multiplicity="0..1" />
+          <End Role="AddressDistrict" Type="Self.AddressDistrict" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AddressCity">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AddressDistrict">
+              <PropertyRef Name="F_CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Attribute_AttributeGroup">
+          <End Role="AttributeGroup" Type="Self.AttributeGroup" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Attribute" Type="Self.Attribute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttributeGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Attribute">
+              <PropertyRef Name="F_AttributeGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Attribute_AttributeItem">
+          <End Role="AttributeItem" Type="Self.AttributeItem" Multiplicity="0..1" />
+          <End Role="Attribute" Type="Self.Attribute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttributeItem">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Attribute">
+              <PropertyRef Name="F_AttributeItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttributeItem_Attribute">
+          <End Role="Attribute" Type="Self.Attribute" Multiplicity="0..1" />
+          <End Role="AttributeItem" Type="Self.AttributeItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attribute">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AttributeItem">
+              <PropertyRef Name="F_AttributeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttributeValue_Attribute">
+          <End Role="Attribute" Type="Self.Attribute" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AttributeValue" Type="Self.AttributeValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attribute">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AttributeValue">
+              <PropertyRef Name="F_AttributeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttributeGroup_AttributeGroup">
+          <End Role="AttributeGroup" Type="Self.AttributeGroup" Multiplicity="0..1" />
+          <End Role="AttributeGroup1" Type="Self.AttributeGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttributeGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AttributeGroup1">
+              <PropertyRef Name="F_AttributeGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttributeGroup_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="AttributeGroup" Type="Self.AttributeGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AttributeGroup">
+              <PropertyRef Name="F_MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttributeValue_AttributeItem">
+          <End Role="AttributeItem" Type="Self.AttributeItem" Multiplicity="0..1" />
+          <End Role="AttributeValue" Type="Self.AttributeValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttributeItem">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AttributeValue">
+              <PropertyRef Name="F_AttributeItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttributeValue_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
+          <End Role="AttributeValue" Type="Self.AttributeValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AttributeValue">
+              <PropertyRef Name="F_ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Comments">
+          <End Role="Comments" Type="Self.Comments" Multiplicity="0..1" />
+          <End Role="Comments1" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comments">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Comments1">
+              <PropertyRef Name="F_CommentsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Posts">
+          <End Role="Posts" Type="Self.Posts" Multiplicity="0..1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="F_PostsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Component__F_Com__245D67DE">
+          <End Role="ComponentSetUp" Type="Self.ComponentSetUp" Multiplicity="0..1" />
+          <End Role="ComponentItemSetUp" Type="Self.ComponentItemSetUp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ComponentSetUp">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ComponentItemSetUp">
+              <PropertyRef Name="F_ComponentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="F_MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemGallery_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
+          <End Role="ItemGallery" Type="Self.ItemGallery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemGallery">
+              <PropertyRef Name="F_ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShopItem_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
+          <End Role="ShopItem" Type="Self.ShopItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ShopItem">
+              <PropertyRef Name="F_ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="Menu1" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Menu1">
+              <PropertyRef Name="F_MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posts_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="Posts" Type="Self.Posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="F_MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PollAnswer_PollQuestion">
+          <End Role="PollQuestion" Type="Self.PollQuestion" Multiplicity="0..1" />
+          <End Role="PollAnswer" Type="Self.PollAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PollQuestion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PollAnswer">
+              <PropertyRef Name="F_PollQuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PollLog_PollAnswer">
+          <End Role="PollAnswer" Type="Self.PollAnswer" Multiplicity="0..1" />
+          <End Role="PollLog" Type="Self.PollLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PollAnswer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PollLog">
+              <PropertyRef Name="F_PollAnswerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tags_Posts_Mapping_Posts">
+          <End Role="Posts" Type="Self.Posts" Multiplicity="1" />
+          <End Role="Tags_Posts_Mapping" Type="Self.Tags_Posts_Mapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tags_Posts_Mapping">
+              <PropertyRef Name="F_PostsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Roll_Mapping_RollGroupe_AspNetRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="0..1" />
+          <End Role="Roll_Mapping_RollGroupe" Type="Self.Roll_Mapping_RollGroupe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Roll_Mapping_RollGroupe">
+              <PropertyRef Name="F_RollID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Roll_Mapping_RollGroupe_RollGroupe">
+          <End Role="RollGroupe" Type="Self.RollGroupe" Multiplicity="0..1" />
+          <End Role="Roll_Mapping_RollGroupe" Type="Self.Roll_Mapping_RollGroupe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RollGroupe">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Roll_Mapping_RollGroupe">
+              <PropertyRef Name="F_RollGroupeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRollMapping_RollGroupe">
+          <End Role="RollGroupe" Type="Self.RollGroupe" Multiplicity="0..1" />
+          <End Role="UserRollMapping" Type="Self.UserRollMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RollGroupe">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserRollMapping">
+              <PropertyRef Name="F_RollGroupeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShekayatInboxOutBox_Shekayat">
+          <End Role="Shekayat" Type="Self.Shekayat" Multiplicity="0..1" />
+          <End Role="ShekayatInboxOutBox" Type="Self.ShekayatInboxOutBox" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shekayat">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ShekayatInboxOutBox">
+              <PropertyRef Name="F_ShekayatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShopItem_Shop">
+          <End Role="Shop" Type="Self.Shop" Multiplicity="0..1" />
+          <End Role="ShopItem" Type="Self.ShopItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shop">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ShopItem">
+              <PropertyRef Name="F_ShopID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tags_Posts_Mapping_Tags">
+          <End Role="Tags" Type="Self.Tags" Multiplicity="1" />
+          <End Role="Tags_Posts_Mapping" Type="Self.Tags_Posts_Mapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tags">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tags_Posts_Mapping">
+              <PropertyRef Name="F_TagsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketInbox_Ticket">
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="0..1" />
+          <End Role="TicketInbox" Type="Self.TicketInbox" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ticket">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TicketInbox">
+              <PropertyRef Name="F_TicketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketInboxMedia_TicketInbox">
+          <End Role="TicketInbox" Type="Self.TicketInbox" Multiplicity="0..1" />
+          <End Role="TicketInboxMedia" Type="Self.TicketInboxMedia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketInbox">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TicketInboxMedia">
+              <PropertyRef Name="F_TicketInboxID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketLog_TicketInbox">
+          <End Role="TicketInbox" Type="Self.TicketInbox" Multiplicity="0..1" />
+          <End Role="TicketLog" Type="Self.TicketLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketInbox">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TicketLog">
+              <PropertyRef Name="F_TicketInboxID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketOutBox_TicketInbox">
+          <End Role="TicketInbox" Type="Self.TicketInbox" Multiplicity="0..1" />
+          <End Role="TicketOutBox" Type="Self.TicketOutBox" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketInbox">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TicketOutBox">
+              <PropertyRef Name="F_TicketInboxID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRollMapping_AspNetRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="0..1" />
+          <End Role="UserRollMapping" Type="Self.UserRollMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRollMapping">
+              <PropertyRef Name="F_RollID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRollMapping_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="UserRollMapping" Type="Self.UserRollMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRollMapping">
+              <PropertyRef Name="F_UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AddressCity" EntityType="Self.AddressCity" />
+          <EntitySet Name="AddressDistrict" EntityType="Self.AddressDistrict" />
+          <EntitySet Name="AddressState" EntityType="Self.AddressState" />
+          <EntitySet Name="AdminPanelConfig" EntityType="Self.AdminPanelConfig" />
+          <EntitySet Name="Attribute" EntityType="Self.Attribute" />
+          <EntitySet Name="AttributeGroup" EntityType="Self.AttributeGroup" />
+          <EntitySet Name="AttributeItem" EntityType="Self.AttributeItem" />
+          <EntitySet Name="AttributeValue" EntityType="Self.AttributeValue" />
+          <EntitySet Name="Comments" EntityType="Self.Comments" />
+          <EntitySet Name="ComponentItemSetUp" EntityType="Self.ComponentItemSetUp" />
+          <EntitySet Name="ComponentSetUp" EntityType="Self.ComponentSetUp" />
+          <EntitySet Name="Item" EntityType="Self.Item" />
+          <EntitySet Name="ItemGallery" EntityType="Self.ItemGallery" />
+          <EntitySet Name="Languages" EntityType="Self.Languages" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" />
+          <EntitySet Name="PollAnswer" EntityType="Self.PollAnswer" />
+          <EntitySet Name="PollLog" EntityType="Self.PollLog" />
+          <EntitySet Name="PollQuestion" EntityType="Self.PollQuestion" />
+          <EntitySet Name="Posts" EntityType="Self.Posts" />
+          <EntitySet Name="Roll_Mapping_RollGroupe" EntityType="Self.Roll_Mapping_RollGroupe" />
+          <EntitySet Name="RollGroupe" EntityType="Self.RollGroupe" />
+          <EntitySet Name="Shekayat" EntityType="Self.Shekayat" />
+          <EntitySet Name="ShekayatInboxOutBox" EntityType="Self.ShekayatInboxOutBox" />
+          <EntitySet Name="Shop" EntityType="Self.Shop" />
+          <EntitySet Name="ShopItem" EntityType="Self.ShopItem" />
+          <EntitySet Name="Tags" EntityType="Self.Tags" />
+          <EntitySet Name="Tags_Posts_Mapping" EntityType="Self.Tags_Posts_Mapping" />
+          <EntitySet Name="Ticket" EntityType="Self.Ticket" />
+          <EntitySet Name="TicketInbox" EntityType="Self.TicketInbox" />
+          <EntitySet Name="TicketInboxMedia" EntityType="Self.TicketInboxMedia" />
+          <EntitySet Name="TicketLog" EntityType="Self.TicketLog" />
+          <EntitySet Name="TicketOutBox" EntityType="Self.TicketOutBox" />
+          <EntitySet Name="UserInformation" EntityType="Self.UserInformation" />
+          <EntitySet Name="UserRollMapping" EntityType="Self.UserRollMapping" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+          <AssociationSet Name="FK_AddressCity_AddressState" Association="Self.FK_AddressCity_AddressState">
+            <End Role="AddressState" EntitySet="AddressState" />
+            <End Role="AddressCity" EntitySet="AddressCity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AddressDistrict_AddressCity" Association="Self.FK_AddressDistrict_AddressCity">
+            <End Role="AddressCity" EntitySet="AddressCity" />
+            <End Role="AddressDistrict" EntitySet="AddressDistrict" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Attribute_AttributeGroup" Association="Self.FK_Attribute_AttributeGroup">
+            <End Role="AttributeGroup" EntitySet="AttributeGroup" />
+            <End Role="Attribute" EntitySet="Attribute" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Attribute_AttributeItem" Association="Self.FK_Attribute_AttributeItem">
+            <End Role="AttributeItem" EntitySet="AttributeItem" />
+            <End Role="Attribute" EntitySet="Attribute" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttributeItem_Attribute" Association="Self.FK_AttributeItem_Attribute">
+            <End Role="Attribute" EntitySet="Attribute" />
+            <End Role="AttributeItem" EntitySet="AttributeItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttributeValue_Attribute" Association="Self.FK_AttributeValue_Attribute">
+            <End Role="Attribute" EntitySet="Attribute" />
+            <End Role="AttributeValue" EntitySet="AttributeValue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttributeGroup_AttributeGroup" Association="Self.FK_AttributeGroup_AttributeGroup">
+            <End Role="AttributeGroup" EntitySet="AttributeGroup" />
+            <End Role="AttributeGroup1" EntitySet="AttributeGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttributeGroup_Menu" Association="Self.FK_AttributeGroup_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="AttributeGroup" EntitySet="AttributeGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttributeValue_AttributeItem" Association="Self.FK_AttributeValue_AttributeItem">
+            <End Role="AttributeItem" EntitySet="AttributeItem" />
+            <End Role="AttributeValue" EntitySet="AttributeValue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttributeValue_Item" Association="Self.FK_AttributeValue_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="AttributeValue" EntitySet="AttributeValue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Comments" Association="Self.FK_Comments_Comments">
+            <End Role="Comments" EntitySet="Comments" />
+            <End Role="Comments1" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Posts" Association="Self.FK_Comments_Posts">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Component__F_Com__245D67DE" Association="Self.FK__Component__F_Com__245D67DE">
+            <End Role="ComponentSetUp" EntitySet="ComponentSetUp" />
+            <End Role="ComponentItemSetUp" EntitySet="ComponentItemSetUp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Menu" Association="Self.FK_Item_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemGallery_Item" Association="Self.FK_ItemGallery_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="ItemGallery" EntitySet="ItemGallery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShopItem_Item" Association="Self.FK_ShopItem_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="ShopItem" EntitySet="ShopItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_Menu" Association="Self.FK_Menu_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Menu1" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posts_Menu" Association="Self.FK_Posts_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PollAnswer_PollQuestion" Association="Self.FK_PollAnswer_PollQuestion">
+            <End Role="PollQuestion" EntitySet="PollQuestion" />
+            <End Role="PollAnswer" EntitySet="PollAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PollLog_PollAnswer" Association="Self.FK_PollLog_PollAnswer">
+            <End Role="PollAnswer" EntitySet="PollAnswer" />
+            <End Role="PollLog" EntitySet="PollLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tags_Posts_Mapping_Posts" Association="Self.FK_Tags_Posts_Mapping_Posts">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="Tags_Posts_Mapping" EntitySet="Tags_Posts_Mapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Roll_Mapping_RollGroupe_AspNetRoles" Association="Self.FK_Roll_Mapping_RollGroupe_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="Roll_Mapping_RollGroupe" EntitySet="Roll_Mapping_RollGroupe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Roll_Mapping_RollGroupe_RollGroupe" Association="Self.FK_Roll_Mapping_RollGroupe_RollGroupe">
+            <End Role="RollGroupe" EntitySet="RollGroupe" />
+            <End Role="Roll_Mapping_RollGroupe" EntitySet="Roll_Mapping_RollGroupe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRollMapping_RollGroupe" Association="Self.FK_UserRollMapping_RollGroupe">
+            <End Role="RollGroupe" EntitySet="RollGroupe" />
+            <End Role="UserRollMapping" EntitySet="UserRollMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShekayatInboxOutBox_Shekayat" Association="Self.FK_ShekayatInboxOutBox_Shekayat">
+            <End Role="Shekayat" EntitySet="Shekayat" />
+            <End Role="ShekayatInboxOutBox" EntitySet="ShekayatInboxOutBox" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShopItem_Shop" Association="Self.FK_ShopItem_Shop">
+            <End Role="Shop" EntitySet="Shop" />
+            <End Role="ShopItem" EntitySet="ShopItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tags_Posts_Mapping_Tags" Association="Self.FK_Tags_Posts_Mapping_Tags">
+            <End Role="Tags" EntitySet="Tags" />
+            <End Role="Tags_Posts_Mapping" EntitySet="Tags_Posts_Mapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketInbox_Ticket" Association="Self.FK_TicketInbox_Ticket">
+            <End Role="Ticket" EntitySet="Ticket" />
+            <End Role="TicketInbox" EntitySet="TicketInbox" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketInboxMedia_TicketInbox" Association="Self.FK_TicketInboxMedia_TicketInbox">
+            <End Role="TicketInbox" EntitySet="TicketInbox" />
+            <End Role="TicketInboxMedia" EntitySet="TicketInboxMedia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketLog_TicketInbox" Association="Self.FK_TicketLog_TicketInbox">
+            <End Role="TicketInbox" EntitySet="TicketInbox" />
+            <End Role="TicketLog" EntitySet="TicketLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketOutBox_TicketInbox" Association="Self.FK_TicketOutBox_TicketInbox">
+            <End Role="TicketInbox" EntitySet="TicketInbox" />
+            <End Role="TicketOutBox" EntitySet="TicketOutBox" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRollMapping_AspNetRoles" Association="Self.FK_UserRollMapping_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="UserRollMapping" EntitySet="UserRollMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRollMapping_AspNetUsers" Association="Self.FK_UserRollMapping_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserRollMapping" EntitySet="UserRollMapping" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MainDBModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="AddressCity">
+            <EntityTypeMapping TypeName="MainDBModel.AddressCity">
+              <MappingFragment StoreEntitySet="AddressCity">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="F_StateID" ColumnName="F_StateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AddressDistrict">
+            <EntityTypeMapping TypeName="MainDBModel.AddressDistrict">
+              <MappingFragment StoreEntitySet="AddressDistrict">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="F_CityID" ColumnName="F_CityID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AddressState">
+            <EntityTypeMapping TypeName="MainDBModel.AddressState">
+              <MappingFragment StoreEntitySet="AddressState">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdminPanelConfig">
+            <EntityTypeMapping TypeName="MainDBModel.AdminPanelConfig">
+              <MappingFragment StoreEntitySet="AdminPanelConfig">
+                <ScalarProperty Name="F_UserID" ColumnName="F_UserID" />
+                <ScalarProperty Name="FixedSidebar" ColumnName="FixedSidebar" />
+                <ScalarProperty Name="SidebaronHover" ColumnName="SidebaronHover" />
+                <ScalarProperty Name="SubmenuonHover" ColumnName="SubmenuonHover" />
+                <ScalarProperty Name="FixedTopbar" ColumnName="FixedTopbar" />
+                <ScalarProperty Name="BoxedLayout" ColumnName="BoxedLayout" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Theme" ColumnName="Theme" />
+                <ScalarProperty Name="BackGround" ColumnName="BackGround" />
+                <ScalarProperty Name="WebsiteTheme" ColumnName="WebsiteTheme" />
+                <ScalarProperty Name="WebsiteThemeLangs" ColumnName="WebsiteThemeLangs" />
+                <ScalarProperty Name="WebSiteURL" ColumnName="WebSiteURL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attribute">
+            <EntityTypeMapping TypeName="MainDBModel.Attribute">
+              <MappingFragment StoreEntitySet="Attribute">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="F_AttributeGroupID" ColumnName="F_AttributeGroupID" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="ComponentType" ColumnName="ComponentType" />
+                <ScalarProperty Name="TextColor" ColumnName="TextColor" />
+                <ScalarProperty Name="F_AttributeItemID" ColumnName="F_AttributeItemID" />
+                <ScalarProperty Name="Required" ColumnName="Required" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AttributeGroup">
+            <EntityTypeMapping TypeName="MainDBModel.AttributeGroup">
+              <MappingFragment StoreEntitySet="AttributeGroup">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="F_AttributeGroupID" ColumnName="F_AttributeGroupID" />
+                <ScalarProperty Name="Depth" ColumnName="Depth" />
+                <ScalarProperty Name="F_MenuID" ColumnName="F_MenuID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AttributeItem">
+            <EntityTypeMapping TypeName="MainDBModel.AttributeItem">
+              <MappingFragment StoreEntitySet="AttributeItem">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="F_AttributeID" ColumnName="F_AttributeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AttributeValue">
+            <EntityTypeMapping TypeName="MainDBModel.AttributeValue">
+              <MappingFragment StoreEntitySet="AttributeValue">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="F_AttributeID" ColumnName="F_AttributeID" />
+                <ScalarProperty Name="F_AttributeItemID" ColumnName="F_AttributeItemID" />
+                <ScalarProperty Name="F_ItemID" ColumnName="F_ItemID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="MainDBModel.Comments">
+              <MappingFragment StoreEntitySet="Comments">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="CreatedDateOnUTC" ColumnName="CreatedDateOnUTC" />
+                <ScalarProperty Name="Dispaly" ColumnName="Dispaly" />
+                <ScalarProperty Name="NumberOfReply" ColumnName="NumberOfReply" />
+                <ScalarProperty Name="NumberOfLikes" ColumnName="NumberOfLikes" />
+                <ScalarProperty Name="NumberOfDislikes" ColumnName="NumberOfDislikes" />
+                <ScalarProperty Name="F_PostsID" ColumnName="F_PostsID" />
+                <ScalarProperty Name="F_CommentsID" ColumnName="F_CommentsID" />
+                <ScalarProperty Name="F_UserID" ColumnName="F_UserID" />
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ComponentItemSetUp">
+            <EntityTypeMapping TypeName="MainDBModel.ComponentItemSetUp">
+              <MappingFragment StoreEntitySet="ComponentItemSetUp">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="F_ComponentID" ColumnName="F_ComponentID" />
+                <ScalarProperty Name="F_ItemID" ColumnName="F_ItemID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ComponentSetUp">
+            <EntityTypeMapping TypeName="MainDBModel.ComponentSetUp">
+              <MappingFragment StoreEntitySet="ComponentSetUp">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Component" ColumnName="Component" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="F_UserID" ColumnName="F_UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Item">
+            <EntityTypeMapping TypeName="MainDBModel.Item">
+              <MappingFragment StoreEntitySet="Item">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="CreatedDateOnUTC" ColumnName="CreatedDateOnUTC" />
+                <ScalarProperty Name="SubmitedState" ColumnName="SubmitedState" />
+                <ScalarProperty Name="F_MenuID" ColumnName="F_MenuID" />
+                <ScalarProperty Name="F_UserID" ColumnName="F_UserID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="NumberOfVisitors" ColumnName="NumberOfVisitors" />
+                <ScalarProperty Name="AdminDescription" ColumnName="AdminDescription" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemGallery">
+            <EntityTypeMapping TypeName="MainDBModel.ItemGallery">
+              <MappingFragment StoreEntitySet="ItemGallery">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="F_ItemID" ColumnName="F_ItemID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Languages">
+            <EntityTypeMapping TypeName="MainDBModel.Languages">
+              <MappingFragment StoreEntitySet="Languages">
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="isRTL" ColumnName="isRTL" />
+                <ScalarProperty Name="LanguageName" ColumnName="LanguageName" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menu">
+            <EntityTypeMapping TypeName="MainDBModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="F_MenuID" ColumnName="F_MenuID" />
+                <ScalarProperty Name="F_UserID" ColumnName="F_UserID" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="MetaKeywords" ColumnName="MetaKeywords" />
+                <ScalarProperty Name="MetaDescription" ColumnName="MetaDescription" />
+                <ScalarProperty Name="MetaTittle" ColumnName="MetaTittle" />
+                <ScalarProperty Name="MetaSeoName" ColumnName="MetaSeoName" />
+                <ScalarProperty Name="DisplayInFooter" ColumnName="DisplayInFooter" />
+                <ScalarProperty Name="DisplayInSidebar" ColumnName="DisplayInSidebar" />
+                <ScalarProperty Name="ActionContent" ColumnName="ActionContent" />
+                <ScalarProperty Name="DisplayInTopbar" ColumnName="DisplayInTopbar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PollAnswer">
+            <EntityTypeMapping TypeName="MainDBModel.PollAnswer">
+              <MappingFragment StoreEntitySet="PollAnswer">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="AnswerKey" ColumnName="AnswerKey" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="F_PollQuestionID" ColumnName="F_PollQuestionID" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PollLog">
+            <EntityTypeMapping TypeName="MainDBModel.PollLog">
+              <MappingFragment StoreEntitySet="PollLog">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="F_UserID" ColumnName="F_UserID" />
+                <ScalarProperty Name="Device" ColumnName="Device" />
+                <ScalarProperty Name="CreatedOnUTC" ColumnName="CreatedOnUTC" />
+                <ScalarProperty Name="F_PollAnswerID" ColumnName="F_PollAnswerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PollQuestion">
+            <EntityTypeMapping TypeName="MainDBModel.PollQuestion">
+              <MappingFragment StoreEntitySet="PollQuestion">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="CreatedOnUTC" ColumnName="CreatedOnUTC" />
+                <ScalarProperty Name="StartDateOnUTC" ColumnName="StartDateOnUTC" />
+                <ScalarProperty Name="EndDateOnUTC" ColumnName="EndDateOnUTC" />
+                <ScalarProperty Name="F_UserID" ColumnName="F_UserID" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="ChartType" ColumnName="ChartType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Posts">
+            <EntityTypeMapping TypeName="MainDBModel.Posts">
+              <MappingFragment StoreEntitySet="Posts">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Tittle" ColumnName="Tittle" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="F_UserID" ColumnName="F_UserID" />
+                <ScalarProperty Name="F_MenuID" ColumnName="F_MenuID" />
+                <ScalarProperty Name="NumberOfVisitors" ColumnName="NumberOfVisitors" />
+                <ScalarProperty Name="NumberOfComments" ColumnName="NumberOfComments" />
+                <ScalarProperty Name="NumberOfLikes" ColumnName="NumberOfLikes" />
+                <ScalarProperty Name="NumberOfDislikes" ColumnName="NumberOfDislikes" />
+                <ScalarProperty Name="CreatedOnUTC" ColumnName="CreatedOnUTC" />
+                <ScalarProperty Name="MetaDescription" ColumnName="MetaDescription" />
+                <ScalarProperty Name="MetaTittle" ColumnName="MetaTittle" />
+                <ScalarProperty Name="MetaSeoName" ColumnName="MetaSeoName" />
+                <ScalarProperty Name="ImageAlt" ColumnName="ImageAlt" />
+                <ScalarProperty Name="AllowComment" ColumnName="AllowComment" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roll_Mapping_RollGroupe">
+            <EntityTypeMapping TypeName="MainDBModel.Roll_Mapping_RollGroupe">
+              <MappingFragment StoreEntitySet="Roll_Mapping_RollGroupe">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="F_RollGroupeID" ColumnName="F_RollGroupeID" />
+                <ScalarProperty Name="F_RollID" ColumnName="F_RollID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RollGroupe">
+            <EntityTypeMapping TypeName="MainDBModel.RollGroupe">
+              <MappingFragment StoreEntitySet="RollGroupe">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="GroupeName" ColumnName="GroupeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shekayat">
+            <EntityTypeMapping TypeName="MainDBModel.Shekayat">
+              <MappingFragment StoreEntitySet="Shekayat">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ShakiFirstName" ColumnName="ShakiFirstName" />
+                <ScalarProperty Name="ShakiLastName" ColumnName="ShakiLastName" />
+                <ScalarProperty Name="MotashakiFirstName" ColumnName="MotashakiFirstName" />
+                <ScalarProperty Name="MotashakiLastName" ColumnName="MotashakiLastName" />
+                <ScalarProperty Name="ShakiSemat" ColumnName="ShakiSemat" />
+                <ScalarProperty Name="MotashakiSemat" ColumnName="MotashakiSemat" />
+                <ScalarProperty Name="ShakiCodeMelli" ColumnName="ShakiCodeMelli" />
+                <ScalarProperty Name="MotashakiOstan" ColumnName="MotashakiOstan" />
+                <ScalarProperty Name="NoeErtebat" ColumnName="NoeErtebat" />
+                <ScalarProperty Name="MotashakiHozeKhedmat" ColumnName="MotashakiHozeKhedmat" />
+                <ScalarProperty Name="ShakiTell" ColumnName="ShakiTell" />
+                <ScalarProperty Name="ShakiMobile" ColumnName="ShakiMobile" />
+                <ScalarProperty Name="ShakiAddress" ColumnName="ShakiAddress" />
+                <ScalarProperty Name="TarikheName" ColumnName="TarikheName" />
+                <ScalarProperty Name="ShomareNaame" ColumnName="ShomareNaame" />
+                <ScalarProperty Name="NaameMahaleMorajee" ColumnName="NaameMahaleMorajee" />
+                <ScalarProperty Name="NatijeEghdameGhabli" ColumnName="NatijeEghdameGhabli" />
+                <ScalarProperty Name="LastUpdatedOnUTC" ColumnName="LastUpdatedOnUTC" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="F_UserID" ColumnName="F_UserID" />
+                <ScalarProperty Name="TrackingCode" ColumnName="TrackingCode" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShekayatInboxOutBox">
+            <EntityTypeMapping TypeName="MainDBModel.ShekayatInboxOutBox">
+              <MappingFragment StoreEntitySet="ShekayatInboxOutBox">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CreatedDateOnUtc" ColumnName="CreatedDateOnUtc" />
+                <ScalarProperty Name="F_ShekayatID" ColumnName="F_ShekayatID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shop">
+            <EntityTypeMapping TypeName="MainDBModel.Shop">
+              <MappingFragment StoreEntitySet="Shop">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="F_UserID" ColumnName="F_UserID" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="CreatedDateOnUtc" ColumnName="CreatedDateOnUtc" />
+                <ScalarProperty Name="Payed" ColumnName="Payed" />
+                <ScalarProperty Name="PayType" ColumnName="PayType" />
+                <ScalarProperty Name="DeliveryType" ColumnName="DeliveryType" />
+                <ScalarProperty Name="DeliveryCost" ColumnName="DeliveryCost" />
+                <ScalarProperty Name="DeliveryTime" ColumnName="DeliveryTime" />
+                <ScalarProperty Name="OrderedDate" ColumnName="OrderedDate" />
+                <ScalarProperty Name="TransactionNumber" ColumnName="TransactionNumber" />
+                <ScalarProperty Name="ParentUserID" ColumnName="ParentUserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShopItem">
+            <EntityTypeMapping TypeName="MainDBModel.ShopItem">
+              <MappingFragment StoreEntitySet="ShopItem">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="F_ItemID" ColumnName="F_ItemID" />
+                <ScalarProperty Name="F_ShopID" ColumnName="F_ShopID" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="CreatedDateOnUtc" ColumnName="CreatedDateOnUtc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="MainDBModel.Tags">
+              <MappingFragment StoreEntitySet="Tags">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="F_UserID" ColumnName="F_UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags_Posts_Mapping">
+            <EntityTypeMapping TypeName="MainDBModel.Tags_Posts_Mapping">
+              <MappingFragment StoreEntitySet="Tags_Posts_Mapping">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="F_TagsID" ColumnName="F_TagsID" />
+                <ScalarProperty Name="F_PostsID" ColumnName="F_PostsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ticket">
+            <EntityTypeMapping TypeName="MainDBModel.Ticket">
+              <MappingFragment StoreEntitySet="Ticket">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="LastUpdatedOnUTC" ColumnName="LastUpdatedOnUTC" />
+                <ScalarProperty Name="TrackingCode" ColumnName="TrackingCode" />
+                <ScalarProperty Name="F_UserID" ColumnName="F_UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketInbox">
+            <EntityTypeMapping TypeName="MainDBModel.TicketInbox">
+              <MappingFragment StoreEntitySet="TicketInbox">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TicketContent" ColumnName="TicketContent" />
+                <ScalarProperty Name="CreatedOnUTC" ColumnName="CreatedOnUTC" />
+                <ScalarProperty Name="TicketType" ColumnName="TicketType" />
+                <ScalarProperty Name="TicketFrom" ColumnName="TicketFrom" />
+                <ScalarProperty Name="F_TicketID" ColumnName="F_TicketID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketInboxMedia">
+            <EntityTypeMapping TypeName="MainDBModel.TicketInboxMedia">
+              <MappingFragment StoreEntitySet="TicketInboxMedia">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MediaPath" ColumnName="MediaPath" />
+                <ScalarProperty Name="MediaType" ColumnName="MediaType" />
+                <ScalarProperty Name="F_TicketInboxID" ColumnName="F_TicketInboxID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketLog">
+            <EntityTypeMapping TypeName="MainDBModel.TicketLog">
+              <MappingFragment StoreEntitySet="TicketLog">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Device" ColumnName="Device" />
+                <ScalarProperty Name="CreatedOnUTC" ColumnName="CreatedOnUTC" />
+                <ScalarProperty Name="F_TicketInboxID" ColumnName="F_TicketInboxID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketOutBox">
+            <EntityTypeMapping TypeName="MainDBModel.TicketOutBox">
+              <MappingFragment StoreEntitySet="TicketOutBox">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Content_One" ColumnName="Content_One" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="SMSText" ColumnName="SMSText" />
+                <ScalarProperty Name="SMSStatusOne" ColumnName="SMSStatusOne" />
+                <ScalarProperty Name="SMSStatusTwo" ColumnName="SMSStatusTwo" />
+                <ScalarProperty Name="CreatedOnUTC" ColumnName="CreatedOnUTC" />
+                <ScalarProperty Name="F_TicketInboxID" ColumnName="F_TicketInboxID" />
+                <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInformation">
+            <EntityTypeMapping TypeName="MainDBModel.UserInformation">
+              <MappingFragment StoreEntitySet="UserInformation">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="F_UserID" ColumnName="F_UserID" />
+                <ScalarProperty Name="F_CityID" ColumnName="F_CityID" />
+                <ScalarProperty Name="CodeMelli" ColumnName="CodeMelli" />
+                <ScalarProperty Name="F_ParrentUserID" ColumnName="F_ParrentUserID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Tell" ColumnName="Tell" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRollMapping">
+            <EntityTypeMapping TypeName="MainDBModel.UserRollMapping">
+              <MappingFragment StoreEntitySet="UserRollMapping">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="F_UserID" ColumnName="F_UserID" />
+                <ScalarProperty Name="F_RollID" ColumnName="F_RollID" />
+                <ScalarProperty Name="F_RollGroupeID" ColumnName="F_RollGroupeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="MainDBModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="MainDBModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="RootUserID" ColumnName="RootUserID" />
+                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d45c1a602eb44c399c61918065f89b76" Name="Diagram1">
+        <EntityTypeShape EntityType="MainDBModel.AddressCity" Width="1.5" PointX="15" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.AddressDistrict" Width="1.5" PointX="17.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.AddressState" Width="1.5" PointX="12.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.AdminPanelConfig" Width="1.5" PointX="9.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.Attribute" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.AttributeGroup" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.AttributeItem" Width="1.5" PointX="7.5" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.AttributeValue" Width="1.5" PointX="10.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.Comments" Width="1.5" PointX="5.25" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.ComponentItemSetUp" Width="1.5" PointX="20" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.ComponentSetUp" Width="1.5" PointX="17.75" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.Item" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.ItemGallery" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.Languages" Width="1.5" PointX="8.75" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.Menu" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.PollAnswer" Width="1.5" PointX="20" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.PollLog" Width="1.5" PointX="22.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.PollQuestion" Width="1.5" PointX="17.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.Posts" Width="1.5" PointX="3" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.Roll_Mapping_RollGroupe" Width="1.5" PointX="15" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.RollGroupe" Width="1.5" PointX="12.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.Shekayat" Width="1.5" PointX="17.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.ShekayatInboxOutBox" Width="1.5" PointX="20" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.Shop" Width="1.5" PointX="6" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.ShopItem" Width="1.5" PointX="8.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.Tags" Width="1.5" PointX="6" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.Tags_Posts_Mapping" Width="1.5" PointX="8.25" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.Ticket" Width="1.5" PointX="10.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.TicketInbox" Width="1.5" PointX="13" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.TicketInboxMedia" Width="1.5" PointX="15.25" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.TicketLog" Width="1.5" PointX="15.25" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.TicketOutBox" Width="1.5" PointX="15.25" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.UserInformation" Width="1.5" PointX="0.75" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.UserRollMapping" Width="1.5" PointX="15" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.AspNetRoles" Width="1.5" PointX="12.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MainDBModel.AspNetUsers" Width="1.5" PointX="12.75" PointY="18" IsExpanded="true" />
+        <AssociationConnector Association="MainDBModel.FK_AddressCity_AddressState" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK_AddressDistrict_AddressCity" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK_Attribute_AttributeGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK_Attribute_AttributeItem" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK_AttributeItem_Attribute" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK_AttributeValue_Attribute" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK_AttributeGroup_AttributeGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK_AttributeGroup_Menu" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK_AttributeValue_AttributeItem" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK_AttributeValue_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK_Comments_Comments" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK_Comments_Posts" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK__Component__F_Com__245D67DE" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK_Item_Menu" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK_ItemGallery_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK_ShopItem_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK_Menu_Menu" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK_Posts_Menu" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK_PollAnswer_PollQuestion" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK_PollLog_PollAnswer" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK_Tags_Posts_Mapping_Posts" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK_Roll_Mapping_RollGroupe_AspNetRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK_Roll_Mapping_RollGroupe_RollGroupe" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK_UserRollMapping_RollGroupe" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK_ShekayatInboxOutBox_Shekayat" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK_ShopItem_Shop" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK_Tags_Posts_Mapping_Tags" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK_TicketInbox_Ticket" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK_TicketInboxMedia_TicketInbox" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK_TicketLog_TicketInbox" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK_TicketOutBox_TicketInbox" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK_UserRollMapping_AspNetRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="MainDBModel.FK_UserRollMapping_AspNetUsers" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

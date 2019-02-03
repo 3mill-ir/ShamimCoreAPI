@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3cc2196b63054557b9966d696af18673" Name="Diagram1">
+        <EntityTypeShape EntityType="ParkDemoModel.AddressCity" Width="1.5" PointX="15" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.AddressDistrict" Width="1.5" PointX="17.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.AddressState" Width="1.5" PointX="12.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.AdminPanelConfig" Width="1.5" PointX="9.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.Attribute" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.AttributeGroup" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.AttributeItem" Width="1.5" PointX="7.5" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.AttributeValue" Width="1.5" PointX="10.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.Comments" Width="1.5" PointX="5.25" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.ComponentItemSetUp" Width="1.5" PointX="20" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.ComponentSetUp" Width="1.5" PointX="17.75" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.Item" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.ItemGallery" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.Languages" Width="1.5" PointX="8.75" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.Menu" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.PollAnswer" Width="1.5" PointX="20" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.PollLog" Width="1.5" PointX="22.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.PollQuestion" Width="1.5" PointX="17.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.Posts" Width="1.5" PointX="3" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.Roll_Mapping_RollGroupe" Width="1.5" PointX="15" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.RollGroupe" Width="1.5" PointX="12.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.Shekayat" Width="1.5" PointX="17.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.ShekayatInboxOutBox" Width="1.5" PointX="20" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.Shop" Width="1.5" PointX="6" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.ShopItem" Width="1.5" PointX="8.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.Tags" Width="1.5" PointX="6" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.Tags_Posts_Mapping" Width="1.5" PointX="8.25" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.Ticket" Width="1.5" PointX="10.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.TicketInbox" Width="1.5" PointX="13" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.TicketInboxMedia" Width="1.5" PointX="15.25" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.TicketLog" Width="1.5" PointX="15.25" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.TicketOutBox" Width="1.5" PointX="15.25" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.UserInformation" Width="1.5" PointX="0.75" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.UserRollMapping" Width="1.5" PointX="15" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.AspNetRoles" Width="1.5" PointX="12.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParkDemoModel.AspNetUsers" Width="1.5" PointX="12.75" PointY="18" IsExpanded="true" />
+        <AssociationConnector Association="ParkDemoModel.FK_AddressCity_AddressState" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK_AddressDistrict_AddressCity" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK_Attribute_AttributeGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK_Attribute_AttributeItem" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK_AttributeItem_Attribute" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK_AttributeValue_Attribute" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK_AttributeGroup_AttributeGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK_AttributeGroup_Menu" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK_AttributeValue_AttributeItem" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK_AttributeValue_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK_Comments_Comments" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK_Comments_Posts" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK__Component__F_Com__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK_Item_Menu" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK_ItemGallery_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK_ShopItem_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK_Menu_Menu" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK_Posts_Menu" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK_PollAnswer_PollQuestion" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK_PollLog_PollAnswer" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK_Tags_Posts_Mapping_Posts" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK_Roll_Mapping_RollGroupe_AspNetRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK_Roll_Mapping_RollGroupe_RollGroupe" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK_UserRollMapping_RollGroupe" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK_ShekayatInboxOutBox_Shekayat" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK_ShopItem_Shop" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK_Tags_Posts_Mapping_Tags" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK_TicketInbox_Ticket" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK_TicketInboxMedia_TicketInbox" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK_TicketLog_TicketInbox" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK_TicketOutBox_TicketInbox" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK_UserRollMapping_AspNetRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="ParkDemoModel.FK_UserRollMapping_AspNetUsers" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
